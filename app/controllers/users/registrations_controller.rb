@@ -10,9 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @user.create_profile(profile_params)
+  end
 
   # GET /resource/edit
   # def edit
@@ -37,6 +38,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+  private
+
+    def profile_params
+      params.permit(:biography, :first_name, :last_name, :age, :website, :city, :state, :country, :image, :remove_image)
+    end
 
   # protected
 
