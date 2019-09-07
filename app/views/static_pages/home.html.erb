@@ -1,1 +1,9 @@
 Welcome to Project Turtle.
+
+<%= link_to "Sign Up Artist", new_user_registration_path %></br>
+<%= link_to "Sign In Artist", new_user_session_path %></br>
+
+<% if user_signed_in? %>
+  <%= current_user.email %>
+  <%= link_to "Sign out", sign_out_path %>
+<% end %>
