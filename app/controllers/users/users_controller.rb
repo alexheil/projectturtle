@@ -6,6 +6,7 @@ class Users::UsersController < ApplicationController
   def show
     @owner = User.friendly.find(1)
     @user = User.friendly.find(params[:id])
+    @profile = @user.profile
   end
 
   def update

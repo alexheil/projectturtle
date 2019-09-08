@@ -15,4 +15,8 @@ Rails.application.routes.draw do
     get 'register', to: 'users/registrations#new'
   end
 
+  resources :users, controller: 'users/users', only: [:show, :update] do
+    resource :profile, controller: 'users/profiles', only: [:edit, :update]
+  end
+
 end
