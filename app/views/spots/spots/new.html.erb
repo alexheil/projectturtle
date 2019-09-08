@@ -1,0 +1,20 @@
+<%= form_for(@spot, url: user_spots_path) do |f| %>
+  <%= render 'partials/errors/spot_errors' %>
+
+  <div class="field">
+    <%= f.label :note %>
+    <%= f.text_field :note, class: "text-field" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude, class: "text-field" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude, class: "text-field" %>
+  </div>
+
+  <%= f.submit "Create spot", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+<% end %>

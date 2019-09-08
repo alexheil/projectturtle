@@ -1,8 +1,10 @@
-before_action :authenticate_user!, except: :show
+class Spots::SpotsController < ApplicationController  
+
+  before_action :authenticate_user!, except: :show
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_user
-  before_action :banned, except: [:show, :index]
-  before_action :confirmed, except: [:show, :index]
+  #before_action :banned, except: [:show, :index]
+  #before_action :confirmed, except: [:show, :index]
 
   def show
     @owner = User.friendly.find(1)
@@ -16,7 +18,7 @@ before_action :authenticate_user!, except: :show
   def create
     @spot = @user.spots.build(spot_params)
     if @spot.save
-      flash[:notice] = "You just created " + @spot.title + "!"
+      flash[:notice] = "You just created a spot!"
       redirect_to user_spot_path(@user, @spot)
     else
       flash.now[:alert] = 'Whoa! Something went wrong!'
@@ -75,7 +77,7 @@ before_action :authenticate_user!, except: :show
     end
 
     def spot_params
-      params.require(:spot).permit(:city_id, :title, :venue, :category, :description, :what_to_bring, :what_to_wear, :where_to_park, :website, :address, :start_hour, :start_minute, :end_hour, :end_minute, :month, :day, :year, :start_time, :end_time, :latitude, :longitude, :image, :remove_image, :spot_type, :start_am_pm, :end_am_pm, :sponsored, :street_number, :street_name, :city_name, :state_name, :country_name, :zip_code, :suite_number, :price)
+      params.require(:spot).permit(:note, :latitude, :longitude, :image, :remove_image)
     end
 
 end

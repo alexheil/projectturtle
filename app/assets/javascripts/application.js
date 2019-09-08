@@ -14,3 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var menuToggle = function() {
+
+  $('#menu-click').click(function() {
+    $('#menu-container').fadeIn(300);
+  });
+
+  $('#close-menu').click(function() {
+    $('#menu-container').fadeOut(300);
+  });
+
+  $('#menu-click-menu').click(function() {
+    $('#menu-container').fadeOut(300);
+  });
+
+};
+
+$(document).ready(menuToggle);
+$(document).on('turbolinks:load', menuToggle);

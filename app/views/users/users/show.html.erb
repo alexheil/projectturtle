@@ -3,3 +3,7 @@
 <% if @profile.city.present? %>
   <%= @profile.city %>
 <% end %>
+
+<%= @user.spots.count %>
+
+<%= link_to "Create new spot!", new_user_spot_path(current_user) %>

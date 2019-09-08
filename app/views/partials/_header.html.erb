@@ -1,0 +1,38 @@
+<div class="header-container">
+  <nav class="nav padding-vertical-large">
+    <div class="site-title">
+      <span id="menu-click">&#9776;</span><a href="https://ninthvalley.com"><span class="bold">NINTH</span><span class="thin">VALLEY</span></a>
+    </div>
+  </nav>
+</div>
+
+
+<div id="menu-container" class="side-menu">
+  <div class="header-container-menu">
+    <nav class="nav padding-vertical-large">
+      <div class="site-title">
+        <span id="menu-click-menu">&#9776;</span><a href="https://ninthvalley.com"><span class="bold">NINTH</span><span class="thin">VALLEY</span></a>
+      </div>
+    </nav>
+  </div>
+
+  <nav class="header-container-menu">
+    <ul>
+      <li><%= link_to 'DISCOVER', '#', class: "nav-links" %></li>
+      <li><%= link_to 'DISCOVER', '#', class: "nav-links" %></li>
+      <li><%= link_to 'DISCOVER', '#', class: "nav-links" %></li>
+      <li><%= link_to 'DISCOVER', '#', class: "nav-links" %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to 'SIGN OUT', sign_out_path, class: "nav-links" %></li>
+      <% else %>
+        <li><%= link_to 'REGISTER', register_path, class: "nav-links" %></li>
+        <li><%= link_to 'SIGN IN', sign_in_path, class: "nav-links" %></li>
+      <% end %>
+
+      <li class="bottom">
+        <span id="close-menu" class="nav-links">CLOSE</span>
+      </li>
+      
+    </ul>
+  </nav>
+</div>
