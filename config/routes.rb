@@ -19,4 +19,6 @@ Rails.application.routes.draw do
     resource :profile, controller: 'users/profiles', only: [:edit, :update]
   end
 
+  resources :spots, controller: 'spots/spots'
+
 end
