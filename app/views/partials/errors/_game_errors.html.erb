@@ -1,8 +1,8 @@
-<% if @spot.errors.any? %>
+<% if @game.errors.any? %>
   <div id="error_explanation">
-      <h2><%= pluralize(@spot.errors.count, "error") %> prevented your spot from being saved:</h2>
+      <h2><%= pluralize(@game.errors.count, "error") %> prevented your game from being saved:</h2>
     <ul>
-    <% @spot.errors.full_messages.each do |msg| %>
+    <% @game.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

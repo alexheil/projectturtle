@@ -16,3 +16,7 @@ Welcome to Project Turtle.</br>
 <% end %>
 
 <%= link_to "create game", new_game_path %>
+
+<% Game.all.each do |game| %>
+  <%= link_to game.title, game_path(game) %>
+<% end %>

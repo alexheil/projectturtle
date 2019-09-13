@@ -13,6 +13,7 @@ class Games::GamesController < ApplicationController
 
   def show
     @game = Game.friendly.find(params[:id])
+    @playlists = @game.playlists
   end
 
   def new
@@ -87,7 +88,7 @@ class Games::GamesController < ApplicationController
     end
 
     def game_params
-      params.require(:game).permit(:note, :latitude, :longitude, :image, :remove_image)
+      params.require(:game).permit(:title, :description, :image)
     end
 
 end
