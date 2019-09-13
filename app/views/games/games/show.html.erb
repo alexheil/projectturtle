@@ -1,5 +1,5 @@
 <%= @game.title %>
 
 <% @playlists.each do |playlist| %>
-  <%= playlist.title %>
+  <%= link_to playlist.title, game_playlist_path(@game, playlist) %>
 <% end %>

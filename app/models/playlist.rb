@@ -1,12 +1,11 @@
-class Game < ApplicationRecord
+class Playlist < ApplicationRecord
 
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  default_scope -> { order('games.title ASC') }
+  belongs_to :game
 
-  has_many :playlists
-
+  validates :category_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }
   #validates :image, presence: true

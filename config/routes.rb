@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resource :profile, controller: 'users/profiles', only: [:edit, :update]
   end
 
-  resources :games, controller: 'games/games'
+  resources :games, controller: 'games/games' do
+    resources :playlist, controller: 'playlist/playlist'
+  end
 
 end

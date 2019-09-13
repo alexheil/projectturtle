@@ -1,0 +1,10 @@
+<%= form_for(@playlist, url: game_playlists_path) do |f| %>
+  <%= render 'partials/errors/playlist_errors' %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "text-field" %>
+  </div>
+
+  <%= f.submit "Create playlist", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+<% end %>
