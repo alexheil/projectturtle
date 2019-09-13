@@ -1,7 +1,6 @@
 class Games::GamesController < ApplicationController  
 
-  before_action :authenticate_admin!, except: [:show, :index]
-  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_admin, except: [:show, :index]
   before_action :set_user
   #before_action :banned, except: [:show, :index]
   #before_action :confirmed, except: [:show, :index]
@@ -38,7 +37,7 @@ class Games::GamesController < ApplicationController
     @game = Game.friendly.find(params[:id])
     if @game.update_attributes(game_params)
       flash[:notice] = "Good job!"
-      redirect_to user_game_path(@user, @game)
+      redirect_to game_path(@game)
     else
       flash.now[:alert] = 'Bad job!'
       render 'edit'

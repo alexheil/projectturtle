@@ -75,6 +75,21 @@ img {
   display: block;
 }
 
+/* ***************** UNIVERSAL ************* */
+
+.flex {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container {
+  width: 94%;
+  margin: 0 auto;
+  max-width: 1920px;
+}
+
 /* *************** FLASH ***************** */
 
 .flash {
@@ -112,16 +127,16 @@ img {
 /* ************ HEADER *********************** */
 
 .header-container {
-  width: 96%;
+  width: 94%;
   margin: 0 auto;
   background: transparent;
   a {
-    color: $black;
+    color: $white;
   }
 }
 
 .header-container-menu {
-  width: 96%;
+  width: 94%;
   margin: 0 auto;
   background: transparent;
   a {
@@ -139,10 +154,10 @@ img {
     font-size: 2em;
     text-transform: uppercase;
     letter-spacing: .3em;
-    color: $main;
+    color: $white;
     &:hover {
       text-decoration: none;
-      color: $dark;
+      color: $white;
     }
   }
   ul {
@@ -219,4 +234,137 @@ img {
     text-align: left;
     cursor: pointer;
   }
+}
+
+/* ************************* FOOTER ********************** */
+
+.full-footer-container {
+  width: 100%;
+  clear: both;
+  padding-top: 5vh;
+}
+
+.footer {
+  font-size: .75em;
+  width: 100%;
+  display: inline-block;
+  span {
+    float: left;
+  }
+  .nav-links {
+    @include transition;
+    color: $white;
+    padding: 0;
+    &:hover {
+      @include transition;
+      color: $main;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    float: right;
+    li {
+      position: relative;
+      display: inline-block;
+      margin: 0 1vw;
+      &:first-child {
+        margin: 0 1vw 0 0;
+      }
+    }
+  }
+}
+
+.footer-disclaimer {
+  font-size: .75em;
+  text-align: center;
+  color: $white;
+  padding-bottom: 2vh;
+}
+
+/* ************************ SPACING ************************ */
+
+.padding-vertical-large {
+  padding: 10vh 0;
+}
+
+.padding-top {
+  padding-top: 3vh;
+}
+
+.padding-top-large {
+  padding-top: 10vh;
+}
+
+.padding-top-mini {
+  padding-top: 1vh;
+}
+
+.padding-vertical-mini {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.padding-vertical {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.padding-horizontal-mini {
+  padding-right: 1vh;
+  padding-left: 1vh;
+}
+
+.padding-horizontal {
+  padding-right: 3vh;
+  padding-left: 3vh;
+}
+
+.padding-bottom {
+  padding-bottom: 3vh;
+}
+
+.padding-bottom-large {
+  padding-bottom: 10vh;
+}
+
+.padding-bottom-mini {
+  padding-bottom: 1vh;
+}
+
+.center {
+  text-align: center;
+}
+
+/* ************************ BLOCKS ************************ */
+
+.fifty {
+  @include transition;
+  margin: 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: $shadow-lite;
+  border-radius: $radius;
+}
+
+/* ************************ GAMES ************************ */
+
+.game-title {
+  font-size: 2em;
+}
+
+.thumbnail-image-feed-five {
+  height: 40vw;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: $radius - 1;
+  border-top-right-radius: $radius - 1;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: .3s ease-in-out;
+  -moz-transition: .3s ease-in-out;
+  -o-transition: .3s ease-in-out;
 }

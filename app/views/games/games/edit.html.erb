@@ -1,4 +1,4 @@
-<%= form_for(@game, url: games_path) do |f| %>
+<%= form_for(@game, url: game_path) do |f| %>
   <%= render 'partials/errors/game_errors' %>
 
   <div class="field">
@@ -16,5 +16,5 @@
     <%= f.text_field :description, class: "text-field" %>
   </div>
 
-  <%= f.submit "Create game", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+  <%= f.submit "Update game", data: { disable_with: 'Updating...' }, class: "submit-button" %>
 <% end %>
