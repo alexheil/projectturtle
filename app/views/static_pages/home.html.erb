@@ -1,16 +1,18 @@
-Welcome to Project Turtle.
+Welcome to Project Turtle.</br>
 
 <% if user_signed_in? %>
-  <%= current_user.email %>
-  <%= link_to "Sign out", sign_out_path %>
+  <%= current_user.email %></br>
+  <%= link_to "Sign out", sign_out_path %></br>
 
   <% if current_user.profile.present? %>
-    yes
+    yes</br>
   <% else %>
-    no
+    no</br>
   <% end %>
 
 <% else %>
   <%= link_to "Sign Up Artist", new_user_registration_path %></br>
   <%= link_to "Sign In Artist", new_user_session_path %></br>
 <% end %>
+
+<%= link_to "create game", new_game_path %>

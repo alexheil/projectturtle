@@ -2,18 +2,8 @@
   <%= render 'partials/errors/game_errors' %>
 
   <div class="field">
-    <%= f.label :note %>
-    <%= f.text_field :note, class: "text-field" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :latitude %>
-    <%= f.text_field :latitude, class: "text-field" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :longitude %>
-    <%= f.text_field :longitude, class: "text-field" %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "text-field" %>
   </div>
 
   <%= f.submit "Create game", data: { disable_with: 'Creating...' }, class: "submit-button" %>

@@ -1,7 +1,8 @@
 class Games::GamesController < ApplicationController  
 
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user_new, only: [:new, :create]
   before_action :set_user
   #before_action :banned, except: [:show, :index]
   #before_action :confirmed, except: [:show, :index]
@@ -59,6 +60,13 @@ class Games::GamesController < ApplicationController
     def correct_user
       @owner = User.friendly.find(1)
       @game = Game.friendly.find(params[:id])
+      unless current_user == @owner
+        redirect_to root_url
+      end
+    end
+
+    def correct_user_new
+      @owner = User.friendly.find(1)
       unless current_user == @owner
         redirect_to root_url
       end
