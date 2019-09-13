@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
   resources :users, controller: 'users/users', only: [:show, :update] do
     resource :profile, controller: 'users/profiles', only: [:edit, :update]
-    resources :spots, controller: 'spots/spots'
   end
+
+  resources :spots, controller: 'spots/spots'
 
 end

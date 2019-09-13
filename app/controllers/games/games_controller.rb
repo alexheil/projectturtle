@@ -1,25 +1,28 @@
-class Spots::SpotsController < ApplicationController  
+class Games::GamesController < ApplicationController  
 
-  before_action :authenticate_user!, except: :show
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user
   #before_action :banned, except: [:show, :index]
   #before_action :confirmed, except: [:show, :index]
 
+  def index
+    @games = Game.all
+  end
+
   def show
-    @owner = User.friendly.find(1)
-    @spot = Spot.friendly.find(params[:id])
+    @game = Game.friendly.find(params[:id])
   end
 
   def new
-    @spot = Spot.new
+    @game = Game.new
   end
 
   def create
-    @spot = @user.spots.build(spot_params)
-    if @spot.save
-      flash[:notice] = "You just created a spot!"
-      redirect_to user_spot_path(@user, @spot)
+    @game = Game.new(game_params)
+    if @game.save
+      flash[:notice] = "You just created a game!"
+      redirect_to game_path(@game)
     else
       flash.now[:alert] = 'Whoa! Something went wrong!'
       render 'new'
@@ -27,14 +30,14 @@ class Spots::SpotsController < ApplicationController
   end
 
   def edit
-    @spot = Spot.friendly.find(params[:id])
+    @game = Game.friendly.find(params[:id])
   end
 
   def update
-    @spot = Spot.friendly.find(params[:id])
-    if @spot.update_attributes(spot_params)
+    @game = Game.friendly.find(params[:id])
+    if @game.update_attributes(game_params)
       flash[:notice] = "Good job!"
-      redirect_to user_spot_path(@user, @spot)
+      redirect_to user_game_path(@user, @game)
     else
       flash.now[:alert] = 'Bad job!'
       render 'edit'
@@ -42,7 +45,7 @@ class Spots::SpotsController < ApplicationController
   end
 
   def destroy
-    @spot = Spot.friendly.find(params[:id]).destroy
+    @game = Game.friendly.find(params[:id]).destroy
     redirect_to root_url
     flash[:notice] = "Delete successful."
   end
@@ -55,9 +58,8 @@ class Spots::SpotsController < ApplicationController
 
     def correct_user
       @owner = User.friendly.find(1)
-      @spot = Spot.friendly.find(params[:id])
-      @user = User.friendly.find(@spot.user_id)
-      unless current_user == @user || current_user = @owner
+      @game = Game.friendly.find(params[:id])
+      unless current_user == @owner
         redirect_to root_url
       end
     end
@@ -76,8 +78,8 @@ class Spots::SpotsController < ApplicationController
       end
     end
 
-    def spot_params
-      params.require(:spot).permit(:note, :latitude, :longitude, :image, :remove_image)
+    def game_params
+      params.require(:game).permit(:note, :latitude, :longitude, :image, :remove_image)
     end
 
 end

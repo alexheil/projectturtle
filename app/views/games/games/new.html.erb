@@ -1,5 +1,5 @@
-<%= form_for(@spot, url: user_spots_path) do |f| %>
-  <%= render 'partials/errors/spot_errors' %>
+<%= form_for(@game, url: user_games_path) do |f| %>
+  <%= render 'partials/errors/game_errors' %>
 
   <div class="field">
     <%= f.label :note %>
@@ -16,5 +16,5 @@
     <%= f.text_field :longitude, class: "text-field" %>
   </div>
 
-  <%= f.submit "Create spot", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+  <%= f.submit "Create game", data: { disable_with: 'Creating...' }, class: "submit-button" %>
 <% end %>
