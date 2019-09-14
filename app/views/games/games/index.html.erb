@@ -2,23 +2,25 @@
   <div class="flex">
 
     <% @games.each do |game| %>
-      <div class="fifty">
-        
+      <div class="game-container">
+
         <%= link_to(game_path(game)) do %>
-          <img class="thumbnail-image-feed-five" src="<%= game.image %>">
+          <div class="game-image-container link-color">
+            <img class="game-thumbnail-image" src="<%= game.image %>">
+            <div class="game-image-centered">
+              <div class="padding-bottom-mini game-title">
+                <%= game.title %>
+              </div>
+              <div class="game-subtext padding-bottom-mini">
+                <%= pluralize(game.playlists.count, "Tournament") %>
+              </div>
+              <div class="game-subtext">
+                Featured Playlists: 1v1, 2v2, Arena
+              </div>
+            </div>
+          </div>
         <% end %>
 
-        <div class="padding-vertical padding-horizontal">
-
-          <div class="game-title center padding-vertical">
-            <%= link_to game.title, game_path(game) %>
-          </div>
-
-          <div class="center">
-            <%= pluralize(game.playlists.count, "Tournament") %>
-          </div>
-
-        </div>
       </div>
     <% end %>
 

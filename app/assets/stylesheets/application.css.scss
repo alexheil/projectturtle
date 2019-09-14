@@ -11,8 +11,8 @@ $green: #47B975; /* OCEAN GREEN */
 $border: #BEC8CE; /* LOBLOLLY */
 $red: #F44336; /* POMEGRANATE */
 $yellow: #ff9800; /* PIZAZZ */
-$black: #00140D; /* GREEN KELP */
-$white: #FFEEE6; /* FAFAFA DESERT STORM */
+$black: #212121; /* GREEN KELP */
+$white: #fff; /* FAFAFA DESERT STORM */
 $grey: #EEEEEE; /* GALLERY */
 $fancy: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -46,8 +46,8 @@ body {
   letter-spacing: 0px;
   font-family: $fancy;
   font-weight: 400;
-  background: $black;
-  color: $white;
+  background: $white;
+  color: $black;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -131,7 +131,7 @@ img {
   margin: 0 auto;
   background: transparent;
   a {
-    color: $white;
+    color: $black;
   }
 }
 
@@ -181,7 +181,7 @@ img {
   padding-right: 2vw;
   font-weight: 400;
   letter-spacing: $letterspacer;
-  color: $white;
+  color: $black;
 }
 
 #menu-click-menu {
@@ -190,7 +190,7 @@ img {
   padding-right: 2vw;
   font-weight: 400;
   letter-spacing: $letterspacer;
-  color: $white;
+  color: $black;
 }
 
 #menu-container {
@@ -341,7 +341,7 @@ img {
 .twentyfour {
   @include transition;
   margin: 0;
-  width: 24%;
+  width: 49%;
   display: inline-block;
   vertical-align: top;
   box-shadow: $shadow-lite;
@@ -350,21 +350,68 @@ img {
 
 /* ************************ GAMES ************************ */
 
-.game-title {
-  font-size: 2em;
+.game-container {
+  @include transition;
+  margin: 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: $shadow-lite;
+  border-radius: $radius;
+  margin-bottom: 3vh;
+  &:hover {
+    opacity: .90;
+    box-shadow: $shadow;
+  }
 }
 
-.thumbnail-image-feed-five {
-  height: 40vw;
+.game-title {
+  line-height: 1em;
+  font-size: 3em;
+  font-weight: 700;
+  color: $white;
+}
+
+.large-game-title {
+  line-height: 1em;
+  font-size: 6em;
+  font-weight: 700;
+  color: $white;
+}
+
+.game-subtext {
+  color: $white;
+}
+
+.game-thumbnail-image {
+  height: 31vh;
   width: 100%;
+  border-radius: $radius;
   object-fit: cover;
-  display: block;
-  border-top-left-radius: $radius - 1;
-  border-top-right-radius: $radius - 1;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  opacity: .2;
   -webkit-backface-visibility: hidden;
-  -webkit-transition: .3s ease-in-out;
-  -moz-transition: .3s ease-in-out;
-  -o-transition: .3s ease-in-out;
+}
+
+.game-large-image {
+  height: 61vh;
+  width: 100%;
+  border-radius: $radius;
+  object-fit: cover;
+  opacity: .2;
+  -webkit-backface-visibility: hidden;
+}
+
+.game-image-container {
+  position: relative;
+  text-align: center;
+  background: $black;
+  border-radius: $radius - 1;
+}
+
+.game-image-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1em;
 }

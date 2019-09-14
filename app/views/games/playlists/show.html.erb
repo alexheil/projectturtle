@@ -1,2 +1,18 @@
-<%= @game.title %>
-<%= @playlist.title %>
+<div class="container">
+
+  <div class="game-image-container link-color">
+    <img class="game-large-image" src="<%= @playlist.image %>">
+    <div class="game-image-centered">
+      <div class="padding-bottom-mini large-game-title">
+        <%= @playlist.title %>
+      </div>
+      <div class="padding-bottom-mini game-title">
+        <%= @game.title %>
+      </div>
+      <div class="game-subtext padding-bottom-mini">
+        <%= pluralize(@game.playlists.count, "Tournament") %>
+      </div>
+    </div>
+  </div>
+
+</div>
