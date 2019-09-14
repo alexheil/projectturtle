@@ -6,6 +6,7 @@ class Game < ApplicationRecord
   default_scope -> { order('games.title ASC') }
 
   has_many :playlists, dependent: :destroy
+  has_many :leagues, through: :playlists
 
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }

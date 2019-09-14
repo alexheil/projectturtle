@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190914230350) do
+ActiveRecord::Schema.define(version: 20190913014214) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
@@ -19,17 +19,6 @@ ActiveRecord::Schema.define(version: 20190914230350) do
     t.string   "slug"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "leagues", force: :cascade do |t|
-    t.integer  "playlist_id"
-    t.string   "title"
-    t.text     "description"
-    t.string   "image"
-    t.string   "slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["playlist_id"], name: "index_leagues_on_playlist_id"
   end
 
   create_table "playlists", force: :cascade do |t|

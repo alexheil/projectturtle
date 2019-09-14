@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :games, controller: 'games/games' do
-    resources :playlists, controller: 'games/playlists'
+    resources :playlists, controller: 'games/playlists' do
+      resources :leagues, controller: 'games/leagues'
+    end
   end
 
 end
