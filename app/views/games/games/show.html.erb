@@ -7,7 +7,7 @@
         <%= @game.title %>
       </div>
       <div class="game-subtext padding-bottom-mini">
-        <%= pluralize(@game.playlists.count, "Tournament") %>
+        <%= pluralize(@game.leagues.count, "League") %>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
                 <%= playlist.title %>
               </div>
               <div class="game-subtext padding-bottom-mini">
-                <%= pluralize(@game.playlists.count, "League") %>
+                <%= pluralize(playlist.leagues.count, "League") %>
               </div>
               <div class="game-subtext">
                 Featured Playlists: 1v1, 2v2, Arena

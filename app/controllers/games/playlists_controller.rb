@@ -5,6 +5,7 @@ class Games::PlaylistsController < ApplicationController
   def show
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:id])
+    @leagues = @playlist.leagues
   end
 
   def new

@@ -3,7 +3,7 @@ class League < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  belongs_to :game
+  belongs_to :game, optional: true
   belongs_to :playlist
 
   validates :playlist_id, presence: true

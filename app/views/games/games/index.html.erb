@@ -12,10 +12,13 @@
                 <%= game.title %>
               </div>
               <div class="game-subtext padding-bottom-mini">
-                <%= pluralize(game.playlists.count, "League") %>
+                <%= pluralize(game.leagues.count, "League") %>
               </div>
               <div class="game-subtext">
-                Featured Playlists: 1v1, 2v2, Arena
+                -
+                <% game.playlists.take(3).each do |playlist| %>
+                  <%= playlist.title %> -
+                <% end %>
               </div>
             </div>
           </div>

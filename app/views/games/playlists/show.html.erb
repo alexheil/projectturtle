@@ -10,9 +10,34 @@
         <%= @game.title %>
       </div>
       <div class="game-subtext padding-bottom-mini">
-        <%= pluralize(@game.playlists.count, "League") %>
+        <%= pluralize(@playlist.leagues.count, "League") %>
       </div>
     </div>
+  </div>
+
+  <div class="padding-vertical flex">
+    <% @leagues.each do |league| %>
+      <div class="game-container">
+
+        <%= link_to(game_playlist_league_path(@game, @playlist, league)) do %>
+          <div class="game-image-container link-color">
+            <img class="game-thumbnail-image" src="<%= league.image %>">
+            <div class="game-image-centered">
+              <div class="padding-bottom-mini game-title">
+                <%= league.title %>
+              </div>
+              <div class="game-subtext padding-bottom-mini">
+                <%= pluralize(@playlist.leagues.count, "Participant") %>
+              </div>
+              <div class="game-subtext">
+                Featured Playlists: 1v1, 2v2, Arena
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
   </div>
 
 </div>
