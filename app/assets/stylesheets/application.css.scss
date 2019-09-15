@@ -338,6 +338,16 @@ img {
 
 /* ************************ BLOCKS ************************ */
 
+.twentyfour {
+  @include transition;
+  margin: 0;
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  padding-bottom: 3vh;
+  border-bottom: 2px solid $border;
+}
+
 .thirty {
   @include transition;
   margin: 0;

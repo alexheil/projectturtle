@@ -1,7 +1,36 @@
-<%= @league.title %>  <%= @league.playlist.title %> <%= @league.playlist.game.title %> 
-
 <div class="container">
 
-  
+  <div class="game-image-container link-color">
+    <img class="game-large-image" src="<%= @league.image %>">
+    <div class="game-image-centered">
+      <div class="padding-bottom-mini large-game-title">
+        <%= @league.title %>
+      </div>
+      <div class="padding-bottom-mini game-title">
+        <%= @league.playlist.game.title %> - <%= @league.playlist.title %>
+      </div>
+      <div class="game-subtext padding-bottom-mini">
+        <%= pluralize(@playlist.leagues.count, "Participant") %>
+      </div>
+      <div class="game-subtext padding-bottom-mini">
+        Every Tuesday - 7 PM
+      </div>
+    </div>
+  </div>
+
+  <div class="padding-vertical flex">
+    <div class="twentyfour center">
+      This Week
+    </div>
+    <div class="twentyfour center">
+      Standings
+    </div>
+    <div class="twentyfour center">
+      Schedule
+    </div>
+    <div class="twentyfour center">
+      Players
+    </div>
+  </div>
 
 </div>
