@@ -3,9 +3,11 @@ class Games::LeaguesController < ApplicationController
   before_action :authenticate_admin, except: :show
 
   def show
+    @user = current_user if user_signed_in?
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:id])
+    @participant = Participant.new
   end
 
   def new
