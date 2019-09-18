@@ -3,7 +3,7 @@ class Games::ParticipantsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    @user = User.friendly.find(params[:user_id])
+    @user = current_user
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])

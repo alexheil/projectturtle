@@ -6,6 +6,7 @@ class League < ApplicationRecord
   belongs_to :game, optional: true
   belongs_to :playlist
 
+  has_many :participants
   has_many :users, through: :participants
 
   validates :playlist_id, presence: true

@@ -10,7 +10,7 @@
         <%= @league.playlist.game.title %> - <%= @league.playlist.title %>
       </div>
       <div class="game-subtext padding-bottom-mini">
-        <%= pluralize(@playlist.leagues.count, "Participant") %>
+        <%= pluralize(@league.participants.count, "Participant") %>
       </div>
       <div class="game-subtext padding-bottom-mini">
         Every Tuesday - 7 PM
