@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :games, controller: 'games/games' do
     resources :playlists, controller: 'games/playlists' do
-      resources :leagues, controller: 'games/leagues'
+      resources :leagues, controller: 'games/leagues' do
+        resources :participants, controller: 'games/participants', only: [:create, :destroy]
+      end
     end
   end
 

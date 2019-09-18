@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  has_many :participants, dependent: :destroy
+
+  belongs_to :league, optional: true
+
   before_save :should_generate_new_friendly_id?, if: :username_changed?
   before_save :downcase_username
 

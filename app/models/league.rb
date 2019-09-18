@@ -6,6 +6,8 @@ class League < ApplicationRecord
   belongs_to :game, optional: true
   belongs_to :playlist
 
+  has_many :users, through: :participants
+
   validates :playlist_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }
