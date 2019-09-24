@@ -32,6 +32,7 @@
       Players
     </div>
   </div>
+  
 
   <% if user_signed_in? %>
     <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
