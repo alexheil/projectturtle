@@ -41,7 +41,7 @@ class Leagues::LeaguesController < ApplicationController
     @league = League.friendly.find(params[:id])
     if @league.update_attributes(league_params)
       flash[:notice] = "Good job!"
-      redirect_to game_playlist_path(@game, @playlist)
+      redirect_to game_playlist_league_path(@game, @playlist, @league)
     else
       flash.now[:alert] = 'Bad job!'
       render 'edit'
