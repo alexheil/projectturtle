@@ -1,4 +1,4 @@
-class Leagues::LeaguesController < ApplicationController
+class Leagues::WeeksController < ApplicationController
 
   before_action :authenticate_admin, except: :show
 
@@ -24,7 +24,7 @@ class Leagues::LeaguesController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = @league.weeks.build(week_params)
     if @league.save
-      flash[:notice] = "You just created " + @league.title + "!"
+      flash[:notice] = "You just created " + @week.title + "!"
       redirect_to game_playlist_league_path(@game, @playlist, @league)
     else
       flash.now[:alert] = 'Whoa! Something went wrong!'
