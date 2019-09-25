@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :playlists, controller: 'games/playlists' do
       resources :leagues, controller: 'leagues/leagues' do
         resources :participants, controller: 'leagues/participants', only: [:create, :destroy]
+        resources :weeks, controller: 'leagues/weeks', only: [:create, :destroy] do
+          # resources :matches, controller: 'leagues/matches', only: [:create, :destroy]
+        end
       end
     end
   end
