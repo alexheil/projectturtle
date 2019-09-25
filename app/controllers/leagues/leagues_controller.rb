@@ -1,4 +1,4 @@
-class Games::LeaguesController < ApplicationController
+class Leagues::LeaguesController < ApplicationController
 
   before_action :authenticate_admin, except: :show
 

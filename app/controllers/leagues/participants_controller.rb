@@ -1,4 +1,4 @@
-class Games::ParticipantsController < ApplicationController
+class Leagues::ParticipantsController < ApplicationController
 
   before_action :authenticate_user!
   
