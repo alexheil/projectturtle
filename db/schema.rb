@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190917231909) do
+ActiveRecord::Schema.define(version: 20190925155346) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
@@ -104,6 +104,17 @@ ActiveRecord::Schema.define(version: 20190917231909) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.integer  "league_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.string   "slug"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["league_id"], name: "index_weeks_on_league_id"
   end
 
 end
