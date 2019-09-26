@@ -5,7 +5,7 @@ class Week < ApplicationRecord
   # has_many :matches, dependent: :destroy
   belongs_to :league
 
-  has_may :matches, dependent
+  has_many :matches, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }

@@ -26,9 +26,9 @@ class Leagues::MatchesController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:week_id])
     @match = @week.matches.build(match_params)
-    if @league.save
-      flash[:notice] = "You just created " + @week.title + "!"
-      redirect_to game_playlist_league_week_path(@game, @playlist, @league, @week)
+    if @match.save
+      flash[:notice] = "You just created " + @match.title + "!"
+      redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else
       flash.now[:alert] = 'Whoa! Something went wrong!'
       render 'new'

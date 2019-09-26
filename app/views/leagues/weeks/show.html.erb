@@ -1,1 +1,49 @@
+<div class="container">
+
+  <div class="game-image-container link-color">
+    <img class="game-large-image" src="<%= @league.image %>">
+    <div class="game-image-centered">
+      <div class="padding-bottom-mini large-game-title">
+        <%= @league.title %>
+      </div>
+      <div class="padding-bottom-mini game-title">
+        <%= @league.playlist.game.title %> - <%= @league.playlist.title %>
+      </div>
+      <div class="game-subtext padding-bottom-mini">
+        <%= pluralize(@league.participants.count, "Participant") %>
+      </div>
+      <div class="game-subtext padding-bottom-mini">
+        Every Tuesday - 7 PM
+      </div>
+    </div>
+  </div>
+
+  <div class="padding-vertical flex">
+    <% @week.matches.each do |match| %>
+      <div class="game-container">
+
+        <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @week, match)) do %>
+          <div class="game-image-container link-color">
+            <img class="game-thumbnail-image" src="<%= match.image %>">
+            <div class="game-image-centered">
+              <div class="padding-bottom-mini game-title">
+                <%= match.title %>
+              </div>
+              <div class="game-subtext padding-bottom-mini">
+                <%= pluralize(@week.matches.count, "Match") %>
+              </div>
+              <div class="game-subtext">
+                Every Tuesday - 7 PM
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
 <%= link_to "create match", new_game_playlist_league_week_match_path(@game, @playlist, @league, @week) %>
+<%= pluralize(@week.matches.count, "Match") %> <%= pluralize(Match.all.count, "Match") %>

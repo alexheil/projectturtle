@@ -23,7 +23,7 @@ class Leagues::WeeksController < ApplicationController
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
     @week = @league.weeks.build(week_params)
-    if @league.save
+    if @week.save
       flash[:notice] = "You just created " + @week.title + "!"
       redirect_to game_playlist_league_path(@game, @playlist, @league)
     else
