@@ -9,7 +9,10 @@ class Leagues::MatchesController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:id])
-    @participant = Participant.new
+    @participant_one = Participant.find(@match.participant_one_id)
+    @participant_two = Participant.find(@match.participant_two_id)
+    @user_one = User.friendly.find(@participant_one.user_id)
+    @user_two = User.friendly.find(@participant_two.user_id)
   end
 
   def new
@@ -78,7 +81,7 @@ class Leagues::MatchesController < ApplicationController
     end
 
     def match_params
-      params.require(:match).permit(:title, :description, :image)
+      params.require(:match).permit(:participant_one_id, :participant_two_id, :title, :description, :image)
     end
 
 end

@@ -36,12 +36,19 @@ ActiveRecord::Schema.define(version: 20190925235854) do
 
   create_table "matches", force: :cascade do |t|
     t.integer  "week_id"
+    t.integer  "participant_id"
+    t.integer  "participant_one_id"
+    t.integer  "participant_two_id"
     t.string   "title"
     t.text     "description"
     t.string   "image"
     t.string   "slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["participant_id"], name: "index_matches_on_participant_id"
+    t.index ["participant_one_id", "participant_two_id"], name: "index_matches_on_participant_one_id_and_participant_two_id", unique: true
+    t.index ["participant_one_id"], name: "index_matches_on_participant_one_id"
+    t.index ["participant_two_id"], name: "index_matches_on_participant_two_id"
     t.index ["week_id"], name: "index_matches_on_week_id"
   end
 

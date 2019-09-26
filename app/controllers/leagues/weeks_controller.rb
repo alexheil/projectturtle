@@ -8,7 +8,7 @@ class Leagues::WeeksController < ApplicationController
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:id])
-    @participant = Participant.new
+    @matches = @week.matches
   end
 
   def new
