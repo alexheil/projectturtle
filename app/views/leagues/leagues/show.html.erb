@@ -73,6 +73,8 @@
   <% if @league.participants.any? %>
     <% @league.participants.each do |participant| %>
       <%= participant.user.username %>
+      <%= participant.user.id %>
+      <%= participant.user_id %></br>
     <% end %>
   <% end %>
 

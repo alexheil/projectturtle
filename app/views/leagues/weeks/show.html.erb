@@ -30,7 +30,7 @@
                 <img class="game-thumbnail-image" src="<%= match.image %>">
                 <div class="game-image-centered">
                   <div class="padding-bottom-mini game-title">
-                    <%= match.title %>
+                    <%= Participant.find(match.participant_one_id).user.username %>
                   </div>
                   <div class="game-subtext padding-bottom-mini">
                     <%= pluralize(@week.matches.count, "Match") %>
@@ -49,7 +49,7 @@
                 <img class="game-thumbnail-image" src="<%= match.image %>">
                 <div class="game-image-centered">
                   <div class="padding-bottom-mini game-title">
-                    <%= match.title %>
+                    <%= Participant.find(match.participant_two_id).user.username %>
                   </div>
                   <div class="game-subtext padding-bottom-mini">
                     <%= pluralize(@week.matches.count, "Match") %>
