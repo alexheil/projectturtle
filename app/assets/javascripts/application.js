@@ -41,3 +41,35 @@ var theHovers = function() {
 
 $(document).ready(theHovers);
 $(document).on('turbolinks:load', theHovers);
+
+
+var getFilename = function() {
+
+  $('input[type="file"].profile_image').change(function(e){
+    var fileName = e.target.files[0].name;
+    $('.file-name-image').text(fileName);
+    $('.file-name-image').addClass('padding-top');
+  });
+
+};
+
+$(document).ready(getFilename);
+$(document).on('turbolinks:load', getFilename);
+
+
+var editProfile = function() {
+
+  $('#remove-image-inactive').change(function(){
+    if($(this).is(":checked")) {
+      $('#remove-image-tab').addClass("active-removal-tab");
+      $('#remove-image-tab').removeClass("inactive-removal-tab");
+    } else {
+      $('#remove-image-tab').removeClass("active-removal-tab");
+      $('#remove-image-tab').addClass("inactive-removal-tab");
+    }
+  });
+
+};
+
+$(document).ready(editProfile);
+$(document).on('turbolinks:load', editProfile);

@@ -7,6 +7,7 @@
 $main: #F08653; /* OCEAN GREEN */
 $light: #FFC3A6; /* SPRING RAIN */
 $dark: #88d7bC; /* HOKEY POKEY */
+$darkgrey: #aaa;
 $green: #47B975; /* OCEAN GREEN */
 $border: #BEC8CE; /* LOBLOLLY */
 $red: #F44336; /* POMEGRANATE */
@@ -17,7 +18,7 @@ $grey: #EEEEEE; /* GALLERY */
 $fancy: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $letterspacer: 0.25px;
-$radius: 6px;
+$radius: 20px;
 $shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.42), 0 3px 20px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 $shadow-lite: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 
@@ -86,11 +87,27 @@ img {
 
 /* ***************** UNIVERSAL ************* */
 
+.hidden {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
 .flex {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.mini-text {
+  font-size: 0.75em;
+}
+
+.darkgrey {
+  color: $darkgrey;
 }
 
 .container {
@@ -216,6 +233,13 @@ select {
   margin: 0 0 2vh 0;
 }
 
+.field-two-column {
+  margin: 0 0 0 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 @mixin buttons {
   @include transition;
   width: 100%;
@@ -235,13 +259,66 @@ select {
   border: 2px solid $main;
   color: $white;
   -webkit-font-smoothing: unset;
+  box-shadow: $shadow-lite;
   &:hover {
     box-shadow: $shadow;
+    color: $white;
   }
 }
 
 .submit-button {
   @include buttons;
+}
+
+.image-button {
+  @include buttons;
+  padding: .51vh .51vw;
+  border: 1px solid $main;
+}
+
+.active-removal-tab {
+  @include transition;
+  box-sizing: border-box;
+  background: $red;
+  color: $white;
+  padding: .51vh .51vw;
+  border-radius: $radius;
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: .75em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: $radius;
+  font-family: $fancy;
+  border: 1px solid $red;
+  -webkit-font-smoothing: unset;
+  box-shadow: $shadow;
+}
+
+.inactive-removal-tab {
+  box-sizing: border-box;
+  @include transition;
+  background: $grey;
+  color: $black;
+  padding: .51vh .51vw;
+  border-radius: $radius;
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: .75em;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: $radius;
+  font-family: $fancy;
+  border: 1px solid transparent;
+  -webkit-font-smoothing: unset;
+  &:hover {
+    background: $grey;
+    border: 1px solid $grey;
+  }
 }
 
 /* ************ HEADER *********************** */
@@ -373,7 +450,7 @@ select {
   }
   .nav-links {
     @include transition;
-    color: $white;
+    color: $darkgrey;
     padding: 0;
     &:hover {
       @include transition;
@@ -514,8 +591,20 @@ select {
   width: 49%;
   display: inline-block;
   vertical-align: top;
-  box-shadow: $shadow-lite;
   border-radius: $radius;
+}
+
+.match-show-container {
+  @include transition;
+  margin: 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: $radius;
+  &:hover {
+    opacity: .90;
+    box-shadow: $shadow;
+  }
 }
 
 .match-image-container {
@@ -539,7 +628,6 @@ select {
   width: 49%;
   display: inline-block;
   vertical-align: top;
-  box-shadow: $shadow-lite;
   border-radius: $radius;
   margin-bottom: 3vh;
   &:hover {
@@ -554,7 +642,6 @@ select {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  box-shadow: $shadow-lite;
   border-radius: $radius;
   margin-bottom: 3vh;
   background: $black;
@@ -586,6 +673,13 @@ select {
   color: $white;
 }
 
+.large-x {
+  line-height: 1em;
+  font-size: 12em;
+  font-weight: 700;
+  color: $white;
+}
+
 .game-subtext {
   color: $white;
 }
@@ -612,11 +706,21 @@ select {
   -webkit-backface-visibility: hidden;
 }
 
+.match-large-image {
+  height: 64vh;
+  width: 100%;
+  border-radius: $radius;
+  object-fit: cover;
+  opacity: .2;
+  -webkit-backface-visibility: hidden;
+}
+
 .game-image-container {
   position: relative;
   text-align: center;
   background: $black;
   border-radius: $radius - 1;
+  box-shadow: $shadow-lite;
 }
 
 .game-image-centered {
@@ -633,4 +737,12 @@ select {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1em;
+}
+
+.profile-thumbnail-image {
+  height: 32vh;
+  width: 100%;
+  border-radius: $radius;
+  object-fit: cover;
+  -webkit-backface-visibility: hidden;
 }

@@ -1,6 +1,121 @@
-<%= @match.participant_one_id %>-part one </br>
-<%= @participant_one.user_id %>-user one</br>
-<%= @match.participant_two_id %>-part two</br>
-<%= @participant_two.user_id %>-user two</br>
-<%= @user_one.username %>
-<%= @user_two.username %>
+<div class="container">
+
+  <div class="match-image-container">
+
+    <div class="flex">
+
+      <div class="match-show-container">
+
+        <%= link_to(user_path(User.friendly.find(Participant.find(@match.participant_one_id).user_id))) do %>
+
+          <div class="game-image-container link-color">
+            <img class="match-large-image" src="<%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.image_url(:thumb) %>">
+            <div class="game-image-centered">
+
+
+              <% if user_signed_in? && current_user == User.friendly.find(Participant.find(@match.participant_one_id).user_id) %>
+                <div class="padding-bottom-mini game-you-title">
+
+                  <% if User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name.present? %>
+                    <%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name %>
+                  <% else %>
+                    <%= Participant.find(@match.participant_one_id).user.username %>
+                  <% end %>
+
+                </div>
+                <div class="game-you-subtext padding-bottom-mini">
+                  4 - 1
+                </div>
+              <% else %>
+                <div class="padding-bottom-mini game-title">
+                  
+                  <% if User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name.present? %>
+                    <%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name %>
+                  <% else %>
+                    <%= Participant.find(@match.participant_one_id).user.username %>
+                  <% end %>
+
+                </div>
+                <div class="game-subtext padding-bottom-mini">
+                  4 - 1
+                </div>
+              <% end %>
+
+
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+
+      <div class="match-show-container">
+
+        <%= link_to(user_path(User.friendly.find(Participant.find(@match.participant_two_id).user_id))) do %>
+
+          <div class="game-image-container link-color">
+            <img class="match-large-image" src="<%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.image_url(:thumb) %>">
+            <div class="game-image-centered">
+
+
+              <% if user_signed_in? && current_user == User.friendly.find(Participant.find(@match.participant_two_id).user_id) %>
+                <div class="padding-bottom-mini game-you-title">
+                  
+                  <% if User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name.present? %>
+                    <%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name %>
+                  <% else %>
+                    <%= Participant.find(@match.participant_two_id).user.username %>
+                  <% end %>
+
+                </div>
+                <div class="game-you-subtext padding-bottom-mini">
+                  1 - 4
+                </div>
+              <% else %>
+                <div class="padding-bottom-mini game-title">
+                  
+                  <% if User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name.present? %>
+                    <%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name %>
+                  <% else %>
+                    <%= Participant.find(@match.participant_two_id).user.username %>
+                  <% end %>
+
+                </div>
+                <div class="game-subtext padding-bottom-mini">
+                  1 - 4
+                </div>
+              <% end %>
+
+
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+
+    </div>
+
+    <div class="match-image-centered large-x">
+      x
+    </div>
+
+  </div>
+
+  <div class="flex padding-vertical">
+
+    <div class="match-show-container">
+
+      <%= link_to "Watch on stream", user_path(User.friendly.find(Participant.find(@match.participant_one_id).user_id)), class: "submit-button" %>
+
+    </div>
+
+    <div class="match-show-container">
+
+      <%= link_to "Watch on stream", user_path(User.friendly.find(Participant.find(@match.participant_two_id).user_id)), class: "submit-button" %>
+
+    </div>
+
+  </div>
+
+</div>

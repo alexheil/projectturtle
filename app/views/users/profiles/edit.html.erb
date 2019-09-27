@@ -9,6 +9,11 @@
       <span id="profile_errors"><%= render 'partials/errors/profile_errors' %></span>
 
       <div class="field">
+        <%= f.label :display_name %>
+        <%= f.text_field :display_name, class: "text-field" %>
+      </div>
+
+      <div class="field">
         <%= f.label :first_name %>
         <%= f.text_field :first_name, class: "text-field" %>
       </div>
@@ -19,13 +24,13 @@
 
       <% if @profile.image_data? %>
         <div class="field">
-          <img class="thumbnail-image" src="<%= @user.profile.image_url(:thumb) %>">
+          <img class="profile-thumbnail-image" src="<%= @user.profile.image_url(:thumb) %>">
         </div>
         <div class="flex">
           <div class="field-two-column center">
             <label class="image-button" for="profile-image">Upload a profile image</label>
             <%= f.hidden_field :image, value: @profile.cached_image_data %>
-            <span class="hidden"><%= f.file_field :image, id: "profile-image", class: "course_image" %></span>
+            <span class="hidden"><%= f.file_field :image, id: "profile-image", class: "profile_image" %></span>
             <div class="file-name-image"></div>
           </div>
           <div class="field-two-column center">
@@ -37,7 +42,7 @@
         <div class="padding-bottom">
           <label class="image-button" for="profile-image">Upload a profile image</label>
           <%= f.hidden_field :image, value: @profile.cached_image_data %>
-          <span class="hidden"><%= f.file_field :image, id: "profile-image", class: "course_image" %></span>
+          <span class="hidden"><%= f.file_field :image, id: "profile-image", class: "profile_image" %></span>
           <div class="file-name-image"></div>
         </div>
       <% end %>

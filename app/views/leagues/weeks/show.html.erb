@@ -30,20 +30,32 @@
               <div class="match-container">
 
                 <div class="game-image-container link-color">
-                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.age %>">
+                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.image_url(:thumb) %>">
                   <div class="game-image-centered">
 
 
                     <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_one_id).user_id) %>
                       <div class="padding-bottom-mini game-you-title">
-                        <%= Participant.find(match.participant_one_id).user.username %>
+                        
+                        <% if User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name.present? %>
+                          <%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name %>
+                        <% else %>
+                          <%= Participant.find(match.participant_one_id).user.username %>
+                        <% end %>
+                        
                       </div>
                       <div class="game-you-subtext padding-bottom-mini">
                         4 - 1
                       </div>
                     <% else %>
                       <div class="padding-bottom-mini game-title">
-                        <%= Participant.find(match.participant_one_id).user.username %>
+                        
+                        <% if User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name.present? %>
+                          <%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name %>
+                        <% else %>
+                          <%= Participant.find(match.participant_one_id).user.username %>
+                        <% end %>
+
                       </div>
                       <div class="game-subtext padding-bottom-mini">
                         4 - 1
@@ -59,20 +71,32 @@
               <div class="match-container">
 
                 <div class="game-image-container link-color">
-                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.age %>">
+                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.image_url(:thumb) %>">
                   <div class="game-image-centered">
 
 
                     <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_two_id).user_id) %>
                       <div class="padding-bottom-mini game-you-title">
-                        <%= Participant.find(match.participant_two_id).user.username %>
+                        
+                        <% if User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name.present? %>
+                          <%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name %>
+                        <% else %>
+                          <%= Participant.find(match.participant_two_id).user.username %>
+                        <% end %>
+
                       </div>
                       <div class="game-you-subtext padding-bottom-mini">
                         1 - 4
                       </div>
                     <% else %>
                       <div class="padding-bottom-mini game-title">
-                        <%= Participant.find(match.participant_two_id).user.username %>
+
+                        <% if User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name.present? %>
+                          <%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name %>
+                        <% else %>
+                          <%= Participant.find(match.participant_two_id).user.username %>
+                        <% end %>
+
                       </div>
                       <div class="game-subtext padding-bottom-mini">
                         1 - 4
@@ -88,8 +112,8 @@
 
           <% end %>
 
-          <div class="match-image-centered game-title">
-            —
+          <div class="match-image-centered large-game-title">
+            x
           </div>
 
         </div>

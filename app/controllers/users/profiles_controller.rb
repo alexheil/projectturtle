@@ -30,7 +30,7 @@ class Users::ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:biography, :first_name, :last_name, :age, :website, :city, :state, :country, :image, :remove_image)
+      params.require(:profile).permit(:biography, :display_name, :first_name, :last_name, :age, :website, :city, :state, :country, :image, :remove_image)
     end
 
 end

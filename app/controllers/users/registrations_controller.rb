@@ -42,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
     def profile_params
-      params.permit(:biography, :first_name, :last_name, :age, :website, :city, :state, :country, :image, :remove_image)
+      params.permit(:biography, :display_name, :first_name, :last_name, :age, :website, :city, :state, :country, :image, :remove_image)
     end
 
   # protected

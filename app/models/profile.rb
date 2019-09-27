@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
-  # include ImageUploader[:image]
+  
+  include ImageUploader[:image]
 
   validates :first_name, format: { with: /\A[-a-z]+\z/i }, allow_blank: true
   validates :last_name, format: { with: /\A[-a-z]+\z/i }, allow_blank: true
