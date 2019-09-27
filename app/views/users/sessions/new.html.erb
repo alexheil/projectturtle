@@ -1,3 +1,47 @@
+<%= provide(:title, "Sign In") %>
+
+<div class="container">
+
+  <div class="medium-title center padding-vertical-large">
+    Sign in
+  </div>
+
+  <div class="form-container form-border">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :login, "Username or email" %>
+        <%= f.text_field :login, autocomplete: "login", class: "text-field" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %> <span class="link-light"><%= link_to "I forgot my password.", new_user_password_path, class: "mini-text" %></span>
+        <%= f.password_field :password, autocomplete: "current-password", class: "text-field" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <%= f.submit "Sign in! =P", data: { disable_with: 'Registering...' }, class: "submit-button" %>
+    <% end %>
+  </div>
+
+  <div class="padding-top center">
+    <%= link_to "But I already have an account.", sign_in_path %>
+  </div>
+
+</div>
+
+
+
+
+
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
