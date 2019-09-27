@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20190925235854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_participants_on_league_id"
+    t.index ["user_id", "league_id"], name: "index_participants_on_user_id_and_league_id", unique: true
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 

@@ -22,6 +22,7 @@
       <li><%= link_to 'TOKENS', '#', class: "nav-links" %></li>
       <li><%= link_to 'EXCHANGE', '#', class: "nav-links" %></li>
       <% if user_signed_in? %>
+        <li><%= link_to 'MY LEAGUES', user_path(current_user), class: "nav-links" %></li>
         <li><%= link_to 'PROFILE', edit_user_profile_path(current_user, current_user.profile), class: "nav-links" %></li>
         <li><%= link_to 'SIGN OUT', sign_out_path, class: "nav-links" %></li>
       <% else %>

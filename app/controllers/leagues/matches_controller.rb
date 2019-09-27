@@ -23,6 +23,7 @@ class Leagues::MatchesController < ApplicationController
     @match = Match.new
   end
 
+  # need to select from list of participants in league
   def create
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])

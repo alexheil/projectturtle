@@ -21,6 +21,8 @@ $radius: 6px;
 $shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.42), 0 3px 20px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 $shadow-lite: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 
+/* ****************** MIXIN *********************** */
+
 @mixin transition {
   -webkit-transition: .3s;
   -moz-transition: .3s;
@@ -36,6 +38,13 @@ $shadow-lite: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12
   font-size: .75em;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+@mixin formBorder {
+  box-shadow: $shadow-lite;
+  border-radius: $radius;
+  padding: 2vh 1vw;
+  background: $white;
 }
 
 body {
@@ -90,6 +99,12 @@ img {
   max-width: 1920px;
 }
 
+.medium-title {
+  line-height: 1em;
+  font-size: 3em;
+  font-weight: 700;
+}
+
 /* *************** FLASH ***************** */
 
 .flash {
@@ -122,6 +137,111 @@ img {
   margin: 0 auto;
   padding: 1vh 0;
   font-family: $fancy;
+}
+
+/* ****************** FORMS ********************* */
+
+.form-container {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.form-border {
+  @include formBorder;
+}
+
+.form-border {
+  @include formBorder;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+}
+
+label {
+  @include textLabels;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+::placeholder {
+  color: $border;
+}
+
+@mixin fields {
+  width: 100%;
+  font-size: 1em;
+  font-weight: 400;
+  border: none;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: $radius;
+  font-family: $fancy;
+  letter-spacing: .5px;
+}
+
+select {
+  @include fields;
+  text-indent: 1vw;
+  background: $grey;
+  height: 4vh;
+  background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right $grey;
+  -webkit-appearance: none;
+  background-position-x: 98%;
+}
+
+.text-field {
+  @include fields;
+  padding: 1vh 1vw;
+  background: $grey;
+}
+
+.text-area {
+  @include fields;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 15vh;
+  max-height: 30vh;
+  height: 15vh;
+  padding: 1vh 1vw;
+  background: $grey;
+  display: block;
+}
+
+.field {
+  margin: 0 0 2vh 0;
+}
+
+@mixin buttons {
+  @include transition;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: .75em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: $radius;
+  box-sizing: border-box;
+  font-family: $fancy;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  color: $white;
+  padding: 1vh 1vw;
+  background: $main;
+  border: 2px solid $main;
+  color: $white;
+  -webkit-font-smoothing: unset;
+  &:hover {
+    box-shadow: $shadow;
+  }
+}
+
+.submit-button {
+  @include buttons;
 }
 
 /* ************ HEADER *********************** */
@@ -341,7 +461,7 @@ img {
 .twentyfour {
   @include transition;
   margin: 0;
-  width: 25%;
+  width: 24%;
   display: inline-block;
   vertical-align: top;
   padding-bottom: 3vh;
@@ -374,6 +494,44 @@ img {
 }
 
 /* ************************ GAMES ************************ */
+
+.match-outer-container {
+  @include transition;
+  margin: 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: $radius;
+  margin-bottom: 3vh;
+  &:hover {
+    opacity: .90;
+  }
+}
+
+.match-container {
+  @include transition;
+  margin: 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: $shadow-lite;
+  border-radius: $radius;
+}
+
+.match-image-container {
+  position: relative;
+  text-align: center;
+  border-radius: $radius - 1;
+}
+
+.match-thumbnail-image {
+  height: 32vh;
+  width: 100%;
+  border-radius: $radius;
+  object-fit: cover;
+  opacity: .2;
+  -webkit-backface-visibility: hidden;
+}
 
 .game-container {
   @include transition;
@@ -414,6 +572,13 @@ img {
   color: $white;
 }
 
+.game-you-title {
+  line-height: 1em;
+  font-size: 3em;
+  font-weight: 700;
+  color: $main;
+}
+
 .large-game-title {
   line-height: 1em;
   font-size: 6em;
@@ -425,8 +590,12 @@ img {
   color: $white;
 }
 
+.game-you-subtext {
+  color: $main;
+}
+
 .game-thumbnail-image {
-  height: 31vh;
+  height: 32vh;
   width: 100%;
   border-radius: $radius;
   object-fit: cover;
@@ -435,7 +604,7 @@ img {
 }
 
 .game-large-image {
-  height: 61vh;
+  height: 64vh;
   width: 100%;
   border-radius: $radius;
   object-fit: cover;
@@ -453,6 +622,14 @@ img {
 .game-image-centered {
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1em;
+}
+
+.match-image-centered {
+  position: absolute;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1em;

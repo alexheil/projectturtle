@@ -20,53 +20,79 @@
 
   <div class="padding-vertical flex">
     <% @matches.each do |match| %>
-      <div class="fortynine">
+      <div class="match-outer-container">
 
-        <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @week, match)) do %>
-          <div class="flex">
-            <div class="game-container">
+        <div class="match-image-container">
 
-              <div class="game-image-container link-color">
-                <img class="game-thumbnail-image" src="<%= match.image %>">
-                <div class="game-image-centered">
-                  <div class="padding-bottom-mini game-title">
-                    <%= Participant.find(match.participant_one_id).user.username %>
-                  </div>
-                  <div class="game-subtext padding-bottom-mini">
-                    <%= pluralize(@week.matches.count, "Match") %>
-                  </div>
-                  <div class="game-subtext">
-                    Every Tuesday - 7 PM
-                  </div>
-                </div>
-              </div>
+          <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @week, match)) do %>
 
-            </div>
+            <div class="flex">
+              <div class="match-container">
 
-            <div class="game-container">
+                <div class="game-image-container link-color">
+                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.age %>">
+                  <div class="game-image-centered">
 
-              <div class="game-image-container link-color">
-                <img class="game-thumbnail-image" src="<%= match.image %>">
-                <div class="game-image-centered">
-                  <div class="padding-bottom-mini game-title">
-                    <%= Participant.find(match.participant_two_id).user.username %>
-                  </div>
-                  <div class="game-subtext padding-bottom-mini">
-                    <%= pluralize(@week.matches.count, "Match") %>
-                  </div>
-                  <div class="game-subtext">
-                    Every Tuesday - 7 PM
+
+                    <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_one_id).user_id) %>
+                      <div class="padding-bottom-mini game-you-title">
+                        <%= Participant.find(match.participant_one_id).user.username %>
+                      </div>
+                      <div class="game-you-subtext padding-bottom-mini">
+                        4 - 1
+                      </div>
+                    <% else %>
+                      <div class="padding-bottom-mini game-title">
+                        <%= Participant.find(match.participant_one_id).user.username %>
+                      </div>
+                      <div class="game-subtext padding-bottom-mini">
+                        4 - 1
+                      </div>
+                    <% end %>
+
+
                   </div>
                 </div>
+
               </div>
 
+              <div class="match-container">
+
+                <div class="game-image-container link-color">
+                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.age %>">
+                  <div class="game-image-centered">
+
+
+                    <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_two_id).user_id) %>
+                      <div class="padding-bottom-mini game-you-title">
+                        <%= Participant.find(match.participant_two_id).user.username %>
+                      </div>
+                      <div class="game-you-subtext padding-bottom-mini">
+                        1 - 4
+                      </div>
+                    <% else %>
+                      <div class="padding-bottom-mini game-title">
+                        <%= Participant.find(match.participant_two_id).user.username %>
+                      </div>
+                      <div class="game-subtext padding-bottom-mini">
+                        1 - 4
+                      </div>
+                    <% end %>
+
+
+                  </div>
+                </div>
+
+              </div>
             </div>
+
+          <% end %>
+
+          <div class="match-image-centered game-title">
+            —
           </div>
 
-
-
-          
-        <% end %>
+        </div>
 
       </div>
     <% end %>

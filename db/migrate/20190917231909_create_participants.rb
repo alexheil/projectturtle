@@ -6,5 +6,7 @@ class CreateParticipants < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index :participants, [:user_id, :league_id], unique: true
   end
 end

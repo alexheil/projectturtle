@@ -45,7 +45,7 @@
                 <%= week.title %>
               </div>
               <div class="game-subtext padding-bottom-mini">
-                <%= pluralize(@league.weeks.count, "Match") %>
+                <%= pluralize(week.matches.count, "Match") %>
               </div>
               <div class="game-subtext">
                 Every Tuesday - 7 PM
@@ -73,6 +73,7 @@
   <% if @league.participants.any? %>
     <% @league.participants.each do |participant| %>
       <%= participant.user.username %>
+      <%= participant.id %>
       <%= participant.user.id %>
       <%= participant.user_id %></br>
     <% end %>
