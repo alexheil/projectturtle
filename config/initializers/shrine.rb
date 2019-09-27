@@ -1,4 +1,3 @@
-
 require "shrine"
 
 if Rails.env.development?
