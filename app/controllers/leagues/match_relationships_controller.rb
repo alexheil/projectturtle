@@ -27,7 +27,7 @@ class Leagues::MatchRelationshipsController < ApplicationController
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:match_id])
     @participant = Participant.find(params[:participant_id])
-    @match_relationship = MatchRelationship.
+    @match_relationship = MatchRelationship.find(params[:id]).destroy
   end
 
 end

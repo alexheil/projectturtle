@@ -1,6 +1,6 @@
 class MatchVote < ApplicationRecord
 
-  belongs_to :participant
+  belongs_to :participant, optional: true
   belongs_to :match
   belongs_to :user
 

@@ -14,6 +14,15 @@
 
       <div class="match-show-container">
 
+        <% if user_signed_in? %>
+          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+
+            <%= f.hidden_field :participant_id, :value => @participant_one.id %>
+
+            <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
+          <% end %>
+        <% end %>
+
         <%= link_to(user_path(@user_one)) do %>
 
           <div class="game-image-container link-color">
@@ -33,6 +42,9 @@
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
                   4 - 1
+                </div>
+                <div class="game-you-subtext padding-bottom-mini">
+                  <%= @participant_one.match_votes.count %>
                 </div>
               <% else %>
                 <div class="padding-bottom-mini game-title">
@@ -58,6 +70,16 @@
       </div>
 
       <div class="match-show-container">
+
+        <% if user_signed_in? %>
+          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+            <%= render 'partials/errors/match_votes_errors' %>
+
+            <%= hidden_field_tag :participant_id, value: @participant_two.id %>
+
+            <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
+          <% end %>
+        <% end %>
 
         <%= link_to(user_path(@user_two)) do %>
 
@@ -93,6 +115,9 @@
                   1 - 4
                 </div>
               <% end %>
+              <div class="game-subtext padding-bottom-mini">
+                  <%= @participant_two.match_votes.count %>
+                </div>
 
 
             </div>
@@ -128,4 +153,11 @@
 
 </div>
 
+<% end %>
+
+<% @match.match_votes.each do |vote| %>
+  <%= vote.id %>
+  <%= vote.user_id %>
+  <%= vote.match_id %>
+  <%= vote.participant_id %> -
 <% end %>

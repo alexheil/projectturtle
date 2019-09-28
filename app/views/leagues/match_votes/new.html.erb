@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+          <%= render 'partials/errors/match_votes_errors' %>
+
+            <%= f.hidden_field :participant_id, :value => @participant_two.id %>
+
+            <%= f.submit "Vote for ", data: { disable_with: 'Joining...' }, class: "submit-button" %>
+          <% end %>
+        <% end %>
+
+        <%= Participant.find(@participant_two.id).user.username %>

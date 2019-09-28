@@ -1,0 +1,10 @@
+<% if @match_vote.errors.any? %>
+  <div id="error_explanation">
+      <h2><%= pluralize(@match_vote.errors.count, "error") %> prevented your match_vote from being saved:</h2>
+    <ul>
+    <% @match_vote.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
