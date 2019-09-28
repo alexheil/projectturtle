@@ -16,55 +16,27 @@
       </div>
 
       <div class="field">
-        <%= f.label :password %> <span class="link-light"><%= link_to "I forgot my password.", new_user_password_path, class: "mini-text" %></span>
+        <%= f.label :password %> <span class="dark"><%= link_to "I forgot my password.", new_user_password_path, class: "mini-text" %></span>
         <%= f.password_field :password, autocomplete: "current-password", class: "text-field" %>
       </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
+      <% if devise_mapping.rememberable? -%>
 
-      <%= f.submit "Sign in! =P", data: { disable_with: 'Registering...' }, class: "submit-button" %>
+        <div class="flex">
+          <div class="field-two-column-bottom">
+            <label class="inactive-small-tab" id="remember-tab" for="remember-inactive">Remember me?</label>
+            <span class="hidden"><%= f.check_box(:remember_me, id: "remember-inactive") %></span>
+          </div>
+        </div>
+
+      <% end -%>
+
+      <%= f.submit "Sign in! =P", data: { disable_with: 'Signing you in...' }, class: "submit-button" %>
     <% end %>
   </div>
 
   <div class="padding-top center">
-    <%= link_to "But I already have an account.", sign_in_path %>
+    <%= link_to "But I don't have an account yet.", register_path %>
   </div>
 
 </div>
-
-
-
-
-
-
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login, autofocus: true, autocomplete: "login" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>

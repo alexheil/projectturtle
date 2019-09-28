@@ -8,7 +8,7 @@ $main: #F08653; /* OCEAN GREEN */
 $light: #FFC3A6; /* SPRING RAIN */
 $dark: #88d7bC; /* HOKEY POKEY */
 $darkgrey: #aaa;
-$green: #47B975; /* OCEAN GREEN */
+$green: #38A17C; /* OCEAN GREEN */
 $border: #BEC8CE; /* LOBLOLLY */
 $red: #F44336; /* POMEGRANATE */
 $yellow: #ff9800; /* PIZAZZ */
@@ -240,6 +240,13 @@ select {
   vertical-align: top;
 }
 
+.field-two-column-bottom {
+  margin: 0 0 2vh 0;
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 @mixin buttons {
   @include transition;
   width: 100%;
@@ -314,6 +321,51 @@ select {
   border-radius: $radius;
   font-family: $fancy;
   border: 1px solid transparent;
+  -webkit-font-smoothing: unset;
+  &:hover {
+    background: $grey;
+    border: 1px solid $grey;
+  }
+}
+
+.active-small-tab {
+  @include transition;
+  box-sizing: border-box;
+  background: $green;
+  color: $white;
+  padding: .51vh .51vw;
+  border-radius: $radius;
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: .75em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: $radius;
+  font-family: $fancy;
+  border: 1px solid $green;
+  -webkit-font-smoothing: unset;
+  box-shadow: $shadow-lite;
+}
+
+.inactive-small-tab {
+  box-sizing: border-box;
+  @include transition;
+  background: $grey;
+  color: $black;
+  padding: .51vh .51vw;
+  border-radius: $radius;
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: .75em;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: $radius;
+  font-family: $fancy;
+  border: 1px solid $grey;
   -webkit-font-smoothing: unset;
   &:hover {
     background: $grey;
@@ -542,7 +594,6 @@ select {
   display: inline-block;
   vertical-align: top;
   padding-bottom: 3vh;
-  border-bottom: 2px solid $border;
 }
 
 .thirty {
@@ -745,4 +796,37 @@ select {
   border-radius: $radius;
   object-fit: cover;
   -webkit-backface-visibility: hidden;
+}
+
+.active-tab {
+  @include transition;
+  box-sizing: border-box;
+  background: $main;
+  color: $white;
+  padding: 2vh 0;
+  border-radius: $radius;
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: 700;
+  box-shadow: $shadow-lite;
+}
+
+.inactive-tab {
+  @include transition;
+  box-sizing: border-box;
+  background: $grey;
+  color: $black;
+  padding: 2vh 0;
+  border-radius: $radius;
+  text-transform: uppercase;
+  font-size: .75em;
+  cursor: pointer;
+  &:hover {
+    background: $grey;
+    box-shadow: $shadow-lite;
+  }
+}
+
+#second-tab, #third-tab, #fourth-tab {
+  display: none;
 }

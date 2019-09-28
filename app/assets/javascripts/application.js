@@ -73,3 +73,88 @@ var editProfile = function() {
 
 $(document).ready(editProfile);
 $(document).on('turbolinks:load', editProfile);
+
+var emailTabs = function() {
+
+  $('#remember-inactive').change(function(){
+    if($(this).is(":checked")) {
+      $('#remember-tab').addClass("active-small-tab");
+      $('#remember-tab').removeClass("inactive-small-tab");
+    } else {
+      $('#remember-tab').removeClass("active-small-tab");
+      $('#remember-tab').addClass("inactive-small-tab");
+    }
+  });
+
+};
+
+$(document).ready(emailTabs);
+$(document).on('turbolinks:load', emailTabs);
+
+var sidebarTabs = function() {
+
+  $('#first-tab-click').click(function() {
+    $('#first-tab').fadeIn(300);
+    $('#first-tab-click').addClass('active-tab');
+    $('#first-tab-click').removeClass('inactive-tab');
+    $('#second-tab').hide();
+    $('#second-tab-click').addClass('inactive-tab');
+    $('#second-tab-click').removeClass('active-tab');
+    $('#third-tab').hide();
+    $('#third-tab-click').addClass('inactive-tab');
+    $('#third-tab-click').removeClass('active-tab');
+    $('#fourth-tab').hide();
+    $('#fourth-tab-click').addClass('inactive-tab');
+    $('#fourth-tab-click').removeClass('active-tab');
+  });
+
+  $('#second-tab-click').click(function() {
+    $('#second-tab').fadeIn(300);
+    $('#second-tab-click').addClass('active-tab');
+    $('#second-tab-click').removeClass('inactive-tab');
+    $('#first-tab').hide();
+    $('#first-tab-click').addClass('inactive-tab');
+    $('#first-tab-click').removeClass('active-tab');
+    $('#third-tab').hide();
+    $('#third-tab-click').addClass('inactive-tab');
+    $('#third-tab-click').removeClass('active-tab');
+    $('#fourth-tab').hide();
+    $('#fourth-tab-click').addClass('inactive-tab');
+    $('#fourth-tab-click').removeClass('active-tab');
+  });
+
+  $('#third-tab-click').click(function() {
+    $('#third-tab').fadeIn(300);
+    $('#third-tab-click').addClass('active-tab');
+    $('#third-tab-click').removeClass('inactive-tab');
+    $('#first-tab').hide();
+    $('#first-tab-click').addClass('inactive-tab');
+    $('#first-tab-click').removeClass('active-tab');
+    $('#second-tab').hide();
+    $('#second-tab-click').addClass('inactive-tab');
+    $('#second-tab-click').removeClass('active-tab');
+    $('#fourth-tab').hide();
+    $('#fourth-tab-click').addClass('inactive-tab');
+    $('#fourth-tab-click').removeClass('active-tab');
+  });
+
+  $('#fourth-tab-click').click(function() {
+    $('#fourth-tab').fadeIn(300);
+    $('#fourth-tab-click').addClass('active-tab');
+    $('#fourth-tab-click').removeClass('inactive-tab');
+    $('#first-tab').hide();
+    $('#first-tab-click').addClass('inactive-tab');
+    $('#first-tab-click').removeClass('active-tab');
+    $('#second-tab').hide();
+    $('#second-tab-click').addClass('inactive-tab');
+    $('#second-tab-click').removeClass('active-tab');
+    $('#third-tab').hide();
+    $('#third-tab-click').addClass('inactive-tab');
+    $('#third-tab-click').removeClass('active-tab');
+  });
+
+
+};
+
+$(document).ready(sidebarTabs);
+$(document).on('turbolinks:load', sidebarTabs);

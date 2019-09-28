@@ -18,44 +18,236 @@
     </div>
   </div>
 
-  <div class="padding-vertical flex">
-    <div class="twentyfour center">
+  <div class="padding-top flex">
+    <div id="first-tab-click" class="twentyfour center active-tab">
       This Week
     </div>
-    <div class="twentyfour center">
+    <div id="second-tab-click" class="twentyfour center inactive-tab">
       Standings
     </div>
-    <div class="twentyfour center">
+    <div id="third-tab-click" class="twentyfour center inactive-tab">
       Schedule
     </div>
-    <div class="twentyfour center">
+    <div id="fourth-tab-click" class="twentyfour center inactive-tab">
       Players
     </div>
   </div>
 
-  <div class="padding-vertical flex">
-    <% @league.weeks.each do |week| %>
-      <div class="game-container">
+  <div id="first-tab">
 
-        <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
-          <div class="game-image-container link-color">
-            <img class="game-thumbnail-image" src="<%= week.image %>">
-            <div class="game-image-centered">
-              <div class="padding-bottom-mini game-title">
-                <%= week.title %>
+    <div class="padding-vertical flex">
+      <% @league.weeks.first.matches.each do |match| %>
+        
+        <div class="match-outer-container">
+
+          <div class="match-image-container">
+
+            <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @league.weeks.first, match)) do %>
+
+              <div class="flex">
+                <div class="match-container">
+
+                  <div class="game-image-container link-color">
+                    <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.image_url(:thumb) %>">
+                    <div class="game-image-centered">
+
+
+                      <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_one_id).user_id) %>
+                        <div class="padding-bottom-mini game-you-title">
+                          
+                          <% if User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name.present? %>
+                            <%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name %>
+                          <% else %>
+                            <%= Participant.find(match.participant_one_id).user.username %>
+                          <% end %>
+                          
+                        </div>
+                        <div class="game-you-subtext padding-bottom-mini">
+                          4 - 1
+                        </div>
+                      <% else %>
+                        <div class="padding-bottom-mini game-title">
+                          
+                          <% if User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name.present? %>
+                            <%= User.friendly.find(Participant.find(match.participant_one_id).user_id).profile.display_name %>
+                          <% else %>
+                            <%= Participant.find(match.participant_one_id).user.username %>
+                          <% end %>
+
+                        </div>
+                        <div class="game-subtext padding-bottom-mini">
+                          4 - 1
+                        </div>
+                      <% end %>
+
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="match-container">
+
+                  <div class="game-image-container link-color">
+                    <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.image_url(:thumb) %>">
+                    <div class="game-image-centered">
+
+
+                      <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.participant_two_id).user_id) %>
+                        <div class="padding-bottom-mini game-you-title">
+                          
+                          <% if User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name.present? %>
+                            <%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name %>
+                          <% else %>
+                            <%= Participant.find(match.participant_two_id).user.username %>
+                          <% end %>
+
+                        </div>
+                        <div class="game-you-subtext padding-bottom-mini">
+                          1 - 4
+                        </div>
+                      <% else %>
+                        <div class="padding-bottom-mini game-title">
+
+                          <% if User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name.present? %>
+                            <%= User.friendly.find(Participant.find(match.participant_two_id).user_id).profile.display_name %>
+                          <% else %>
+                            <%= Participant.find(match.participant_two_id).user.username %>
+                          <% end %>
+
+                        </div>
+                        <div class="game-subtext padding-bottom-mini">
+                          1 - 4
+                        </div>
+                      <% end %>
+
+
+                    </div>
+                  </div>
+
+                </div>
               </div>
-              <div class="game-subtext padding-bottom-mini">
-                <%= pluralize(week.matches.count, "Match") %>
-              </div>
-              <div class="game-subtext">
-                Every Tuesday - 7 PM
+
+            <% end %>
+
+            <div class="match-image-centered large-game-title">
+              x
+            </div>
+
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+
+  <div id="second-tab">
+
+    <div class="padding-vertical flex">
+      <% @league.weeks.each do |week| %>
+        <div class="game-container">
+
+          <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
+            <div class="game-image-container link-color">
+              <img class="game-thumbnail-image" src="<%= week.image %>">
+              <div class="game-image-centered">
+                <div class="padding-bottom-mini game-title">
+                  <%= week.title %>
+                </div>
+                <div class="game-subtext padding-bottom-mini">
+                  <%= pluralize(week.matches.count, "Match") %>
+                </div>
+                <div class="game-subtext">
+                  Every Tuesday - 7 PM
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
 
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+
+  <div id="third-tab">
+
+    <div class="padding-vertical flex">
+      <% @league.weeks.each do |week| %>
+        <div class="game-container">
+
+          <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
+            <div class="game-image-container link-color">
+              <img class="game-thumbnail-image" src="<%= week.image %>">
+              <div class="game-image-centered">
+                <div class="padding-bottom-mini game-title">
+                  <%= week.title %>
+                </div>
+                <div class="game-subtext padding-bottom-mini">
+                  <%= pluralize(week.matches.count, "Match") %>
+                </div>
+                <div class="game-subtext">
+                  Every Tuesday - 7 PM
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+
+  <div id="fourth-tab">
+
+    <div class="padding-vertical flex">
+      <% @league.participants.each do |participant| %>
+        <div class="game-container">
+
+          <%= link_to(user_path(User.friendly.find(participant.user_id))) do %>
+            <div class="game-image-container link-color">
+              <img class="game-thumbnail-image" src="<%= User.friendly.find(participant.user_id).profile.image_url(:thumb) %>">
+              <div class="game-image-centered">
+                
+                <% if user_signed_in? && current_user == User.friendly.find(participant.user_id) %>
+                  <div class="padding-bottom-mini game-you-title">
+                    
+                    <% if User.friendly.find(participant.user_id).profile.display_name.present? %>
+                      <%= User.friendly.find(participant.user_id).profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+                    
+                  </div>
+                  <div class="game-you-subtext padding-bottom-mini">
+                    4 - 1
+                  </div>
+                <% else %>
+                  <div class="padding-bottom-mini game-title">
+                    
+                    <% if User.friendly.find(participant.user_id).profile.display_name.present? %>
+                      <%= User.friendly.find(participant.user_id).profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    4 - 1
+                  </div>
+                <% end %>
+
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+    
   </div>
   
 
