@@ -4,11 +4,7 @@ class Match < ApplicationRecord
 
   belongs_to :week
 
-  belongs_to :participant_one, class_name: "Participant"
-  belongs_to :participant_two, class_name: "Participant"
-
-  validates :participant_one_id, presence: true
-  validates :participant_two_id, presence: true
+  ##has_many :match_relationships, dependent: :destroy 
 
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }
