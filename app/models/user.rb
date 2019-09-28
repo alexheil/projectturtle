@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :match_relationships, through: :participants
   has_many :participants, dependent: :destroy
 
+  has_many :match_votes, dependent: :destroy
+
   belongs_to :league, optional: true
 
   before_save :should_generate_new_friendly_id?, if: :username_changed?
