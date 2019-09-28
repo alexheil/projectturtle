@@ -4,7 +4,7 @@ class Match < ApplicationRecord
 
   belongs_to :week
 
-  ##has_many :match_relationships, dependent: :destroy 
+  has_many :match_relationships, dependent: :destroy 
 
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }
