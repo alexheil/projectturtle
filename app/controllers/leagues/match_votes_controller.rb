@@ -25,11 +25,9 @@ class Leagues::MatchVotesController < ApplicationController
     @match = Match.friendly.find(params[:match_id])
     participant_one = Participant.find(@match.match_relationships.first.participant_id)
     @participant_two = Participant.find(@match.match_relationships.last.participant_id)
-    @participant_id = params[:participant_id]
-    @match_vote = MatchVote.new
+    @match_vote = MatchVote.new(vote_params)
     @match_vote.user_id = @user.id
     @match_vote.match_id = @match.id
-    @match_vote.participant_id = @participant_id
     if @match_vote.save
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else
@@ -47,5 +45,11 @@ class Leagues::MatchVotesController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     @match_vote = MatchVote.find(params[:id])
   end
+
+    private
+
+      def vote_params
+        params.permit(:match_id, :participant_id, :user_id)
+      end
 
 end
