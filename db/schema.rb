@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190928172109) do
+ActiveRecord::Schema.define(version: 20190928195235) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20190928172109) do
     t.index ["match_id"], name: "index_match_relationships_on_match_id"
     t.index ["participant_id", "match_id"], name: "index_match_relationships_on_participant_id_and_match_id", unique: true
     t.index ["participant_id"], name: "index_match_relationships_on_participant_id"
+  end
+
+  create_table "match_votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.integer  "participant_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["match_id"], name: "index_match_votes_on_match_id"
+    t.index ["participant_id"], name: "index_match_votes_on_participant_id"
+    t.index ["user_id", "match_id"], name: "index_match_votes_on_user_id_and_match_id", unique: true
+    t.index ["user_id"], name: "index_match_votes_on_user_id"
   end
 
   create_table "matches", force: :cascade do |t|
