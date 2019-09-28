@@ -28,7 +28,7 @@ class Leagues::ParticipantsController < ApplicationController
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
-    @participant = Participant.find(params[:id])
+    @participant = Participant.find(params[:id]).destroy
     #respond_to do |format|
     #  format.html { redirect_to user_playlist_path(@user, @playlist) }
     #  format.js { render :action => "adds" }

@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  #has_many :match_relationships, through: :participants
+  has_many :match_relationships, through: :participants
   has_many :participants, dependent: :destroy
 
   belongs_to :league, optional: true

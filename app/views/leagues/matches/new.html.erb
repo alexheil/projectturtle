@@ -1,15 +1,5 @@
 <%= form_for(@match, url: game_playlist_league_week_matches_path) do |f| %>
-  <%= render 'partials/errors/league_errors' %>
-
-  <div class="field">
-    <%= f.label :participant_one_id %>
-    <%= f.text_field :participant_one_id, class: "text-field" %>
-  </div>
-
-    <div class="field">
-    <%= f.label :participant_two_id %>
-    <%= f.text_field :participant_two_id, class: "text-field" %>
-  </div>
+  <%= render 'partials/errors/match_errors' %>
 
   <div class="field">
     <%= f.label :title %>

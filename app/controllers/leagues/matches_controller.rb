@@ -10,10 +10,12 @@ class Leagues::MatchesController < ApplicationController
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:id])
     @match_relationship = MatchRelationship.new
-    @participant_one = Participant.find(@match.match_relationships.first.participant_id)
-    @user_one = User.friendly.find(@participant_one.user_id)
-    @participant_two = Participant.find(@match.match_relationships.last.participant_id)
-    @user_two = User.friendly.find(@participant_two.user_id)
+    if @match.match_relationships.any?
+      @participant_one = Participant.find(@match.match_relationships.first.participant_id)
+      @user_one = User.friendly.find(@participant_one.user_id)
+      @participant_two = Participant.find(@match.match_relationships.last.participant_id)
+      @user_two = User.friendly.find(@participant_two.user_id)
+    end
   end
 
   def new
