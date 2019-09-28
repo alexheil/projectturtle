@@ -1,3 +1,11 @@
+  <% if user_signed_in? %>
+    <%= form_for(@match_relationship, url: game_playlist_league_week_match_match_relationships_path(@game, @playlist, @league)) do |f| %>
+
+      <%= f.submit "Join match", data: { disable_with: 'Joining...' }, class: "submit-button" %>
+    <% end %>
+  <% end %>
+
+
 <div class="container">
 
   <div class="match-image-container">
@@ -6,20 +14,20 @@
 
       <div class="match-show-container">
 
-        <%= link_to(user_path(User.friendly.find(Participant.find(@match.participant_one_id).user_id))) do %>
+        <%= link_to(user_path(@user_one)) do %>
 
           <div class="game-image-container link-color">
-            <img class="match-large-image" src="<%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.image_url(:thumb) %>">
+            <img class="match-large-image" src="<%= @user_one.profile.image_url(:thumb) %>">
             <div class="game-image-centered">
 
 
-              <% if user_signed_in? && current_user == User.friendly.find(Participant.find(@match.participant_one_id).user_id) %>
+              <% if user_signed_in? && current_user == @user_one %>
                 <div class="padding-bottom-mini game-you-title">
 
-                  <% if User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name.present? %>
-                    <%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name %>
+                  <% if @user_one.profile.display_name.present? %>
+                    <%= @user_one.profile.display_name %>
                   <% else %>
-                    <%= Participant.find(@match.participant_one_id).user.username %>
+                    <%= @user_one.username %>
                   <% end %>
 
                 </div>
@@ -29,10 +37,10 @@
               <% else %>
                 <div class="padding-bottom-mini game-title">
                   
-                  <% if User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name.present? %>
-                    <%= User.friendly.find(Participant.find(@match.participant_one_id).user_id).profile.display_name %>
+                  <% if @user_one.profile.display_name.present? %>
+                    <%= @user_one.profile.display_name %>
                   <% else %>
-                    <%= Participant.find(@match.participant_one_id).user.username %>
+                    <%= @user_one.username %>
                   <% end %>
 
                 </div>
@@ -51,20 +59,20 @@
 
       <div class="match-show-container">
 
-        <%= link_to(user_path(User.friendly.find(Participant.find(@match.participant_two_id).user_id))) do %>
+        <%= link_to(user_path(@user_two)) do %>
 
           <div class="game-image-container link-color">
-            <img class="match-large-image" src="<%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.image_url(:thumb) %>">
+            <img class="match-large-image" src="<%= @user_two.profile.image_url(:thumb) %>">
             <div class="game-image-centered">
 
 
-              <% if user_signed_in? && current_user == User.friendly.find(Participant.find(@match.participant_two_id).user_id) %>
+              <% if user_signed_in? && current_user == @user_two %>
                 <div class="padding-bottom-mini game-you-title">
                   
-                  <% if User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name.present? %>
-                    <%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name %>
+                  <% if @user_two.profile.display_name.present? %>
+                    <%= @user_two.profile.display_name %>
                   <% else %>
-                    <%= Participant.find(@match.participant_two_id).user.username %>
+                    <%= @user_two.username %>
                   <% end %>
 
                 </div>
@@ -74,10 +82,10 @@
               <% else %>
                 <div class="padding-bottom-mini game-title">
                   
-                  <% if User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name.present? %>
-                    <%= User.friendly.find(Participant.find(@match.participant_two_id).user_id).profile.display_name %>
+                  <% if @user_two.profile.display_name.present? %>
+                    <%= @user_two.profile.display_name %>
                   <% else %>
-                    <%= Participant.find(@match.participant_two_id).user.username %>
+                    <%= @user_two.username %>
                   <% end %>
 
                 </div>
@@ -106,13 +114,13 @@
 
     <div class="match-show-container">
 
-      <%= link_to "Watch on stream", user_path(User.friendly.find(Participant.find(@match.participant_one_id).user_id)), class: "submit-button" %>
+      <%= link_to "Watch on stream", user_path(@user_one), class: "submit-button" %>
 
     </div>
 
     <div class="match-show-container">
 
-      <%= link_to "Watch on stream", user_path(User.friendly.find(Participant.find(@match.participant_two_id).user_id)), class: "submit-button" %>
+      <%= link_to "Watch on stream", user_path(@user_two), class: "submit-button" %>
 
     </div>
 

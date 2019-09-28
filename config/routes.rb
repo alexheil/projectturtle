@@ -24,7 +24,9 @@ Rails.application.routes.draw do
       resources :leagues, controller: 'leagues/leagues' do
         resources :participants, controller: 'leagues/participants', only: [:create, :destroy]
         resources :weeks, controller: 'leagues/weeks' do
-          resources :matches, controller: 'leagues/matches'
+          resources :matches, controller: 'leagues/matches' do
+            resources :match_relationships, controller: 'leagues/match_relationships', only: [:create, :destroy]
+          end
         end
       end
     end

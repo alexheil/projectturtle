@@ -9,9 +9,10 @@ class Leagues::MatchesController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:id])
-    @participant_one = Participant.find(@match.participant_one_id)
-    @participant_two = Participant.find(@match.participant_two_id)
+    @match_relationship = MatchRelationship.new
+    @participant_one = Participant.find(@match.match_relationships.first.participant_id)
     @user_one = User.friendly.find(@participant_one.user_id)
+    @participant_two = Participant.find(@match.match_relationships.last.participant_id)
     @user_two = User.friendly.find(@participant_two.user_id)
   end
 
@@ -23,7 +24,6 @@ class Leagues::MatchesController < ApplicationController
     @match = Match.new
   end
 
-  # need to select from list of participants in league
   def create
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
