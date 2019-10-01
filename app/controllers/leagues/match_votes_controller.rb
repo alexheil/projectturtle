@@ -28,6 +28,8 @@ class Leagues::MatchVotesController < ApplicationController
     @match_vote = MatchVote.new(vote_params)
     @match_vote.user_id = @user.id
     @match_vote.match_id = @match.id
+    @match_vote.participant_id = @participant_one.id
+    @match_vote.participant_id = @participant_two.id
     if @match_vote.save
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else
