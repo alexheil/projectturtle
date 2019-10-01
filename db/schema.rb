@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20190928195235) do
     t.datetime "updated_at",     null: false
     t.index ["match_id"], name: "index_match_votes_on_match_id"
     t.index ["participant_id"], name: "index_match_votes_on_participant_id"
-    t.index ["user_id", "match_id"], name: "index_match_votes_on_user_id_and_match_id", unique: true
     t.index ["user_id"], name: "index_match_votes_on_user_id"
   end
 

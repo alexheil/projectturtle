@@ -17,7 +17,8 @@
         <% if user_signed_in? %>
           <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
 
-            <%= f.hidden_field :participant_id, :value => @participant_one.id %>
+            <%= hidden_field_tag :user_id, @user.id %>
+            <%= hidden_field_tag :participant_id, @participant_one.id %>
 
             <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
           <% end %>
@@ -75,7 +76,8 @@
           <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
             <%= render 'partials/errors/match_votes_errors' %>
 
-            <%= hidden_field_tag :participant_id, value: @participant_two.id %>
+            <%= hidden_field_tag :user_id, @user.id %>
+            <%= hidden_field_tag :participant_id, @participant_two.id %>
 
             <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
           <% end %>
@@ -154,6 +156,10 @@
 </div>
 
 <% end %>
+
+<%= @current_user.id %>
+
+<%= @match.id %></br>
 
 <% @match.match_votes.each do |vote| %>
   <%= vote.id %>
