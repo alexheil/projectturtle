@@ -10,6 +10,8 @@ class League < ApplicationRecord
   has_many :users, through: :participants
 
   has_many :weeks, dependent: :destroy
+  has_many :matches, through: :weeks
+  has_many :match_outcomes
 
   validates :playlist_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }

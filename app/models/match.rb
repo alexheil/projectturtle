@@ -1,25 +1,32 @@
 class Match < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :slug, use: :slugged
 
   belongs_to :week
 
   has_many :match_relationships, dependent: :destroy
   has_many :participants, through: :match_relationships 
 
-  has_many :match_votes, dependent: :destroy
+  has_many :match_votes, dependent: :destroy, before_add: :validate_vote_limit
 
   has_one :match_outcome
 
-  validates :title, presence: true, length: { maximum: 100 }
-  #validates :description, presence: true, length: { maximum: 1000 }
-  #validates :image, presence: true
+  NUMBER_OF_PERMITTED_VOTES = 3
 
-  before_save :should_generate_new_friendly_id?, if: :title_changed?
+  validates :week_id, presence: true
+
+  before_save :generated_slug
   
   private
 
-    def should_generate_new_friendly_id?
-      title_changed?
+    def generated_slug
+      require 'securerandom' 
+      self.slug = SecureRandom.hex(16) if slug.blank?
     end
+
+    def validate_vote_limit(match_vote)
+      raise Exception.new if match_votes.size >= NUMBER_OF_PERMITTED_VOTES
+    end
+
+
 end

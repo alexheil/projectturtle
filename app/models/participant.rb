@@ -16,4 +16,8 @@ class Participant < ApplicationRecord
     MatchVote.where(participant_id: id, match_id: match.id)
   end
 
+  def league_match_outcome(league)
+    MatchOutcome.where(participant_id: id, league_id: league.id)
+  end
+
 end

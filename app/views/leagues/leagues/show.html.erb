@@ -146,22 +146,42 @@
   <div id="second-tab">
 
     <div class="padding-vertical flex">
-      <% @league.weeks.each do |week| %>
+      <% @league.participants.each do |participant| %>
         <div class="game-container">
 
-          <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
+          <%= link_to(user_path(User.friendly.find(participant.user_id))) do %>
             <div class="game-image-container link-color">
-              <img class="game-thumbnail-image" src="<%= week.image %>">
+              <img class="game-thumbnail-image" src="<%= User.friendly.find(participant.user_id).profile.image_url(:thumb) %>">
               <div class="game-image-centered">
-                <div class="padding-bottom-mini game-title">
-                  <%= week.title %>
-                </div>
-                <div class="game-subtext padding-bottom-mini">
-                  <%= pluralize(week.matches.count, "Match") %>
-                </div>
-                <div class="game-subtext">
-                  Every Tuesday - 7 PM
-                </div>
+                
+                <% if user_signed_in? && current_user == User.friendly.find(participant.user_id) %>
+                  <div class="padding-bottom-mini game-you-title">
+                    
+                    <% if User.friendly.find(participant.user_id).profile.display_name.present? %>
+                      <%= User.friendly.find(participant.user_id).profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+                    
+                  </div>
+                  <div class="game-you-subtext padding-bottom-mini">
+                    <%= participant.league_match_outcome(@league).count %>
+                  </div>
+                <% else %>
+                  <div class="padding-bottom-mini game-title">
+                    
+                    <% if User.friendly.find(participant.user_id).profile.display_name.present? %>
+                      <%= User.friendly.find(participant.user_id).profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    4 - 1
+                  </div>
+                <% end %>
+
               </div>
             </div>
           <% end %>

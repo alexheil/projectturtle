@@ -8,6 +8,6 @@ class CreateMatchVotes < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    #add_index :match_votes, [:user_id, :match_id], unique: true
+    add_index :match_votes, [:user_id, :match_id], unique: true
   end
 end

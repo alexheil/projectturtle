@@ -16,7 +16,7 @@
 
       <div class="match-show-container">
 
-        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) %>
+        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
           <div class="padding-bottom">
             <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
 
@@ -79,7 +79,7 @@
 
       <div class="match-show-container">
 
-        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) %>
+        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
           <div class="padding-bottom">
             <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
               <%= render 'partials/errors/match_votes_errors' %>

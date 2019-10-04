@@ -37,8 +37,11 @@ ActiveRecord::Schema.define(version: 20191004173950) do
   create_table "match_outcomes", force: :cascade do |t|
     t.integer  "participant_id"
     t.integer  "match_id"
+    t.integer  "league_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["league_id", "match_id"], name: "index_match_outcomes_on_league_id_and_match_id", unique: true
+    t.index ["league_id"], name: "index_match_outcomes_on_league_id"
     t.index ["match_id"], name: "index_match_outcomes_on_match_id"
     t.index ["participant_id", "match_id"], name: "index_match_outcomes_on_participant_id_and_match_id", unique: true
     t.index ["participant_id"], name: "index_match_outcomes_on_participant_id"
@@ -62,17 +65,15 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.datetime "updated_at",     null: false
     t.index ["match_id"], name: "index_match_votes_on_match_id"
     t.index ["participant_id"], name: "index_match_votes_on_participant_id"
+    t.index ["user_id", "match_id"], name: "index_match_votes_on_user_id_and_match_id", unique: true
     t.index ["user_id"], name: "index_match_votes_on_user_id"
   end
 
   create_table "matches", force: :cascade do |t|
     t.integer  "week_id"
-    t.string   "title"
-    t.text     "description"
-    t.string   "image"
     t.string   "slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["week_id"], name: "index_matches_on_week_id"
   end
 

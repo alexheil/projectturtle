@@ -2,20 +2,6 @@ class Leagues::MatchVotesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :vote_user_is_participant, only: :create
-
-  def new
-    @user = current_user
-    @game = Game.friendly.find(params[:game_id])
-    @playlist = Playlist.friendly.find(params[:playlist_id])
-    @league = League.friendly.find(params[:league_id])
-    @week = Week.friendly.find(params[:week_id])
-    @match = Match.friendly.find(params[:match_id])
-    @participant_one = Participant.find(@match.match_relationships.first.participant_id)
-    @user_one = User.friendly.find(@participant_one.user_id)
-    @participant_two = Participant.find(@match.match_relationships.last.participant_id)
-    @user_two = User.friendly.find(@participant_two.user_id)
-    @match_vote = MatchVote.new
-  end
   
   def create
     @user = current_user
@@ -74,15 +60,15 @@ class Leagues::MatchVotesController < ApplicationController
         if @participant_one.match_vote_id(@match).count == 2
           MatchOutcome.create(
             match_id: @match.id,
+            league_id: @league.id,
             participant_id: @participant_one.id
-            )
-          puts "match outcome created for #{@participant_one.user.username}"
+          )
         elsif @participant_two.match_vote_id(@match).count == 2
           MatchOutcome.create(
             match_id: @match.id,
+            league_id: @league.id,
             participant_id: @participant_two.id
-            )
-          puts "match outcome created for #{@participant_two.user.username}"
+          )
         end
 
       end
@@ -90,6 +76,7 @@ class Leagues::MatchVotesController < ApplicationController
       # check that voters are participants
       def vote_user_is_participant
         @user = current_user
+        @owner = User.find(1)
         @game = Game.friendly.find(params[:game_id])
         @playlist = Playlist.friendly.find(params[:playlist_id])
         @league = League.friendly.find(params[:league_id])
@@ -98,7 +85,7 @@ class Leagues::MatchVotesController < ApplicationController
         @participant_one = Participant.find(@match.match_relationships.first.participant_id)
         @participant_two = Participant.find(@match.match_relationships.last.participant_id)
 
-        unless (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id)
+        unless (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner)
           redirect_to root_url
           flash[:alert] = "You are not the correct user."
         end
@@ -107,5 +94,12 @@ class Leagues::MatchVotesController < ApplicationController
       def vote_params
         params.permit(:match_id, :participant_id, :user_id)
       end
+
+      # give certain amount of time until you cannot unvote
+      #def not_able_to_unvote
+        #if @match_vote.created_at (3:43) <= Time.now - 5.minutes (3:45)
+          #redirect_to root_url
+        #end
+      #end
 
 end
