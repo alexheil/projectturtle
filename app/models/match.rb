@@ -8,6 +8,8 @@ class Match < ApplicationRecord
 
   has_many :match_votes, dependent: :destroy
 
+  has_one :match_outcome
+
   validates :title, presence: true, length: { maximum: 100 }
   #validates :description, presence: true, length: { maximum: 1000 }
   #validates :image, presence: true

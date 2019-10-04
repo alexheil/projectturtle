@@ -28,10 +28,12 @@ class Leagues::MatchVotesController < ApplicationController
     @match_vote = MatchVote.new(vote_params)
     @match_vote.match_id = @match.id
     if @match_vote.save
-      if @participant_one.match_vote_id(@match).count >= 2
-        puts "works!!!!!!!!!!!!!!!!!!"
-      elsif @participant_two.match_vote_id(@match).count >= 2
-        puts "x2 works!!!!!!!!!!!!!!!!!!"
+      if @participant_one.match_vote_id(@match).count == 2
+        puts "create_match_outcome for 1"
+      elsif @participant_two.match_vote_id(@match).count == 2
+        puts "create_match_outcome for 2"
+      else
+        puts "need more votes"
       end
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else

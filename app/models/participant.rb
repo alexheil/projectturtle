@@ -7,6 +7,8 @@ class Participant < ApplicationRecord
 
   has_many :match_votes, dependent: :destroy
 
+  has_many :match_outcomes
+
   validates :user_id, presence: true
   validates :league_id, presence: true
 
