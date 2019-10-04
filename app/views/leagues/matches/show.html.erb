@@ -1,9 +1,11 @@
+<div class="padding-vertical">
   <% if user_signed_in? %>
     <%= form_for(@match_relationship, url: game_playlist_league_week_match_match_relationships_path(@game, @playlist, @league, @week, @match)) do |f| %>
 
       <%= f.submit "Join match", data: { disable_with: 'Joining...' }, class: "submit-button" %>
     <% end %>
   <% end %>
+</div>
 
 <% if @match.match_relationships.any? %>
 <div class="container">
@@ -14,19 +16,21 @@
 
       <div class="match-show-container">
 
-        <% if user_signed_in? %>
-          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) %>
+          <div class="padding-bottom">
+            <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
 
-            <%= hidden_field_tag :user_id, @user.id %>
-            <%= hidden_field_tag :participant_id, @participant_one.id %>
+              <%= hidden_field_tag :user_id, @user.id %>
+              <%= hidden_field_tag :participant_id, @participant_one.id %>
 
-            <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
-          <% end %>
+              <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
+            <% end %>
+          </div>
         <% end %>
 
         <%= link_to(user_path(@user_one)) do %>
 
-          <div class="game-image-container link-color">
+          <div class="match-large-image-container link-color">
             <img class="match-large-image" src="<%= @user_one.profile.image_url(:thumb) %>">
             <div class="game-image-centered">
 
@@ -42,7 +46,7 @@
 
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
-                  4 - 1
+                  <%= @participant_one.user.wins %> - <%= @participant_one.user.losses %>
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
                   <%= @participant_one.match_votes.count %>
@@ -58,9 +62,12 @@
 
                 </div>
                 <div class="game-subtext padding-bottom-mini">
-                  4 - 1
+                  <%= @participant_one.user.wins %> - <%= @participant_one.user.losses %>
                 </div>
               <% end %>
+              <div class="game-subtext padding-bottom-mini">
+                <%= @participant_one.match_vote_id(@match).count %>
+              </div>
 
             </div>
           </div>
@@ -72,20 +79,22 @@
 
       <div class="match-show-container">
 
-        <% if user_signed_in? %>
-          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
-            <%= render 'partials/errors/match_votes_errors' %>
+        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) %>
+          <div class="padding-bottom">
+            <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+              <%= render 'partials/errors/match_votes_errors' %>
 
-            <%= hidden_field_tag :user_id, @user.id %>
-            <%= hidden_field_tag :participant_id, @participant_two.id %>
+              <%= hidden_field_tag :user_id, @user.id %>
+              <%= hidden_field_tag :participant_id, @participant_two.id %>
 
-            <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Joining...' }, class: "submit-button" %>
-          <% end %>
+              <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
+            <% end %>
+          </div>
         <% end %>
 
         <%= link_to(user_path(@user_two)) do %>
 
-          <div class="game-image-container link-color">
+          <div class="match-large-image-container link-color">
             <img class="match-large-image" src="<%= @user_two.profile.image_url(:thumb) %>">
             <div class="game-image-centered">
 
@@ -101,7 +110,7 @@
 
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
-                  1 - 4
+                  <%= @participant_two.user.wins %> - <%= @participant_two.user.losses %>
                 </div>
               <% else %>
                 <div class="padding-bottom-mini game-title">
@@ -114,12 +123,12 @@
 
                 </div>
                 <div class="game-subtext padding-bottom-mini">
-                  1 - 4
+                  <%= @participant_two.user.wins %> - <%= @participant_two.user.losses %>
                 </div>
               <% end %>
               <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_two.match_votes.count %>
-                </div>
+                <%= @participant_two.match_vote_id(@match).count %>
+              </div>
 
 
             </div>
@@ -169,12 +178,15 @@
 </br>
 </br>
 
+<% if @match.participants.any? %>
 
 DEBUG</br>
 
 current user - <%= @current_user.id %> </br>
 participant_one.id - <%= @participant_one.id %></br>
+participant_one.user_id - <%= @participant_one.user_id %></br>
 participant_two.id - <%= @participant_two.id %></br>
+participant_two.user_id - <%= @participant_two.user_id %></br>
 
 match - <%= @match.id %></br></br>
 
@@ -196,6 +208,7 @@ participant two match vote count - (where match id is <%= @match.id %> and parti
 
 current user league(participants) count - <%= @user.match_relationships.count %></br>
 
+who wins? - participant <%= @match.match_outcome.participant.id if @match.match_outcome %>  - <%= @match.match_outcome.participant.user.profile.display_name if @match.match_outcome %></br>
+current user wins count - <%= @user.match_outcomes.count %></br>
 
-
-
+<% end %>

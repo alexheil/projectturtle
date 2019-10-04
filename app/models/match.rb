@@ -4,7 +4,8 @@ class Match < ApplicationRecord
 
   belongs_to :week
 
-  has_many :match_relationships, dependent: :destroy 
+  has_many :match_relationships, dependent: :destroy
+  has_many :participants, through: :match_relationships 
 
   has_many :match_votes, dependent: :destroy
 

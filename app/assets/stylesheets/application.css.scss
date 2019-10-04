@@ -652,6 +652,15 @@ select {
   display: inline-block;
   vertical-align: top;
   border-radius: $radius;
+}
+
+.match-large-image-container {
+  @include transition;
+  position: relative;
+  text-align: center;
+  background: $black;
+  border-radius: $radius - 1;
+  box-shadow: $shadow-lite;
   &:hover {
     opacity: .90;
     box-shadow: $shadow;

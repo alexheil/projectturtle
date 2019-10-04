@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  has_many :matches, through: :match_relationships
   has_many :match_relationships, through: :participants
   has_many :match_outcomes, through: :participants
   has_many :participants, dependent: :destroy
@@ -37,6 +38,14 @@ class User < ApplicationRecord
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def wins
+    self.match_outcomes.count
+  end
+
+  def losses
+    self.matches.count - self.match_outcomes.count
   end
 
   private
