@@ -28,6 +28,11 @@ class Leagues::MatchVotesController < ApplicationController
     @match_vote = MatchVote.new(vote_params)
     @match_vote.match_id = @match.id
     if @match_vote.save
+      if @participant_one.match_vote_id(@match).count >= 2
+        puts "works!!!!!!!!!!!!!!!!!!"
+      elsif @participant_two.match_vote_id(@match).count >= 2
+        puts "x2 works!!!!!!!!!!!!!!!!!!"
+      end
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else
       render 'new'
@@ -56,8 +61,13 @@ class Leagues::MatchVotesController < ApplicationController
         @match = Match.friendly.find(params[:match_id])
         @participant_one = Participant.find(@match.match_relationships.first.participant_id)
         @participant_two = Participant.find(@match.match_relationships.last.participant_id)
+        
         @match_one = @match.match_vote_id(@participant_one)
-        if 
+
+        if @participant_one.match_vote_id(@match)
+
+        end
+
       end
 
       def vote_params

@@ -13,10 +13,6 @@ class Match < ApplicationRecord
   #validates :image, presence: true
 
   before_save :should_generate_new_friendly_id?, if: :title_changed?
-
-  def match_vote_id(participant)
-    MatchVote.find_by(participant_id: participant.id, match_id: match.id).id
-  end
   
   private
 

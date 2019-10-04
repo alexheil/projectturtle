@@ -157,16 +157,43 @@
 
 <% end %>
 
-<%= @current_user.id %>
 
-<%= @match.id %></br>
+
+
+
+
+
+
+</br>
+</br>
+</br>
+</br>
+
+
+DEBUG</br>
+
+current user - <%= @current_user.id %> </br>
+participant_one.id - <%= @participant_one.id %></br>
+participant_two.id - <%= @participant_two.id %></br>
+
+match - <%= @match.id %></br></br>
 
 <% @match.match_votes.each do |vote| %>
-  <%= vote.id %>
-  <%= vote.user_id %>
-  <%= vote.match_id %>
-  <%= vote.participant_id %> -
+  vote id - <%= vote.id %></br>
+  vote.user_id - <%= vote.user_id %></br>
+  vote.match_id - <%= vote.match_id %></br>
+  vote.participant_id - <%= vote.participant_id %> - end </br></br>
 <% end %>
 
+</br>
+participant one match vote count - (where match id is <%= @match.id %> and particpant id is <%= @participant_one.id %>) - <% @participant_one.match_vote_id(@match).each do |vote| %>
+  <%= vote.id %>,
+  <% end %></br>
 
-<%= @match.match_vote_id(@participant_one) %>
+participant two match vote count - (where match id is <%= @match.id %> and particpant id is <%= @participant_two.id %>) - <% @participant_two.match_vote_id(@match).each do |vote| %>
+  <%= vote.id %>,
+  <% end %></br>
+
+
+
+

@@ -10,4 +10,8 @@ class Participant < ApplicationRecord
   validates :user_id, presence: true
   validates :league_id, presence: true
 
+  def match_vote_id(match)
+    MatchVote.where(participant_id: id, match_id: match.id)
+  end
+
 end
