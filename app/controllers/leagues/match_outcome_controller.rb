@@ -1,4 +1,4 @@
-class Leagues::MatchVotesController < ApplicationController
+class Leagues::MatchOutecomesController < ApplicationController
 
   before_action :authenticate_user!
 
@@ -46,19 +46,6 @@ class Leagues::MatchVotesController < ApplicationController
   end
 
     private
-
-      def create_match_outcome
-        @user = current_user
-        @game = Game.friendly.find(params[:game_id])
-        @playlist = Playlist.friendly.find(params[:playlist_id])
-        @league = League.friendly.find(params[:league_id])
-        @week = Week.friendly.find(params[:week_id])
-        @match = Match.friendly.find(params[:match_id])
-        @participant_one = Participant.find(@match.match_relationships.first.participant_id)
-        @participant_two = Participant.find(@match.match_relationships.last.participant_id)
-        @match_one = @match.match_vote_id(@participant_one)
-        if 
-      end
 
       def vote_params
         params.permit(:match_id, :participant_id, :user_id)
