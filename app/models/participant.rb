@@ -20,4 +20,16 @@ class Participant < ApplicationRecord
     MatchOutcome.where(participant_id: id, league_id: league.id)
   end
 
+  def league_match_count(league)
+    MatchRelationship.where(participant_id: id, league_id: league.id)
+  end
+
+  def wins
+    self.league_match_outcome(league).count
+  end
+
+  def losses
+    self.league_match_count(league).count - self.league_match_outcome(league).count
+  end
+
 end

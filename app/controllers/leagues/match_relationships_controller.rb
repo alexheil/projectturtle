@@ -8,10 +8,11 @@ class Leagues::MatchRelationshipsController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:match_id])
-    @participant = Participant.find(1)
+    @participant = Participant.find(3)
     @match_relationship = MatchRelationship.new
     @match_relationship.participant_id = @participant.id
     @match_relationship.match_id = @match.id
+    @match_relationship.league_id = @league.id
     if @match_relationship.save
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else

@@ -3,6 +3,7 @@ class Leagues::MatchesController < ApplicationController
   before_action :authenticate_admin, except: :show
 
   def show
+    @owner = User.friendly.find(1)
     @user = current_user if user_signed_in?
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
@@ -34,7 +35,7 @@ class Leagues::MatchesController < ApplicationController
     @week = Week.friendly.find(params[:week_id])
     @match = @week.matches.build(match_params)
     if @match.save
-      flash[:notice] = "You just created " + @match.title + "!"
+      flash[:notice] = "You just created a match!"
       redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
     else
       flash.now[:alert] = 'Whoa! Something went wrong!'
@@ -85,7 +86,7 @@ class Leagues::MatchesController < ApplicationController
     end
 
     def match_params
-      params.require(:match).permit(:participant_one_id, :participant_two_id, :title, :description, :image)
+      params.permit(:slug)
     end
 
 end

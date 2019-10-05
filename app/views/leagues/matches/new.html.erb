@@ -1,20 +1,6 @@
 <%= form_for(@match, url: game_playlist_league_week_matches_path) do |f| %>
   <%= render 'partials/errors/match_errors' %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "text-field" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.text_field :image, class: "text-field" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "text-field" %>
-  </div>
 
   <%= f.submit "Create match", data: { disable_with: 'Creating...' }, class: "submit-button" %>
 <% end %>

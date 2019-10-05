@@ -62,9 +62,6 @@
                           <% end %>
                           
                         </div>
-                        <div class="game-you-subtext padding-bottom-mini">
-                          4 - 1
-                        </div>
                       <% else %>
                         <div class="padding-bottom-mini game-title">
                           
@@ -74,9 +71,6 @@
                             <%= Participant.find(match.match_relationships.first.participant_id).user.username %>
                           <% end %>
 
-                        </div>
-                        <div class="game-subtext padding-bottom-mini">
-                          4 - 1
                         </div>
                       <% end %>
 
@@ -103,9 +97,6 @@
                           <% end %>
 
                         </div>
-                        <div class="game-you-subtext padding-bottom-mini">
-                          1 - 4
-                        </div>
                       <% else %>
                         <div class="padding-bottom-mini game-title">
 
@@ -115,9 +106,6 @@
                             <%= Participant.find(match.match_relationships.last.participant_id).user.username %>
                           <% end %>
 
-                        </div>
-                        <div class="game-subtext padding-bottom-mini">
-                          1 - 4
                         </div>
                       <% end %>
 
@@ -165,7 +153,7 @@
                     
                   </div>
                   <div class="game-you-subtext padding-bottom-mini">
-                    <%= participant.league_match_outcome(@league).count %>
+                    <%= participant.league_match_outcome(@league).count %> - <%= participant.league_match_count(@league).count - participant.league_match_outcome(@league).count %>
                   </div>
                 <% else %>
                   <div class="padding-bottom-mini game-title">
@@ -178,7 +166,7 @@
 
                   </div>
                   <div class="game-subtext padding-bottom-mini">
-                    4 - 1
+                    <%= participant.league_match_outcome(@league).count %> - <%= participant.league_match_count(@league).count - participant.league_match_outcome(@league).count %>
                   </div>
                 <% end %>
 
@@ -243,20 +231,20 @@
                     
                   </div>
                   <div class="game-you-subtext padding-bottom-mini">
-                    4 - 1
+                    <%= participant.user.wins %> - <%= participant.user.losses %>
                   </div>
                 <% else %>
                   <div class="padding-bottom-mini game-title">
                     
-                    <% if User.friendly.find(participant.user_id).profile.display_name.present? %>
-                      <%= User.friendly.find(participant.user_id).profile.display_name %>
+                    <% if participant.profile.display_name.present? %>
+                      <%= participant.profile.display_name %>
                     <% else %>
                       <%= participant.user.username %>
                     <% end %>
 
                   </div>
                   <div class="game-subtext padding-bottom-mini">
-                    4 - 1
+                    <%= participant.user.wins %> - <%= participant.user.losses %>
                   </div>
                 <% end %>
 

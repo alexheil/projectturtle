@@ -76,7 +76,7 @@ class Leagues::MatchVotesController < ApplicationController
       # check that voters are participants
       def vote_user_is_participant
         @user = current_user
-        @owner = User.find(1)
+        @owner = User.friendly.find(1)
         @game = Game.friendly.find(params[:game_id])
         @playlist = Playlist.friendly.find(params[:playlist_id])
         @league = League.friendly.find(params[:league_id])

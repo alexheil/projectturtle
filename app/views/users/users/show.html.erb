@@ -1,7 +1,9 @@
-<%= @user.username %>
+<%= @user.username %></br>
 
 <% if @profile.display_name.present? %>
   <%= @profile.display_name %>
-<% end %>
+<% end %></br>
 
-<%= @user.match_relationships.count %>
+<%= @user.match_relationships.count %></br>
+
+<%= @user.wins %> - <%= @user.losses %></br>

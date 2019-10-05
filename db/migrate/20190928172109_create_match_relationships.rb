@@ -3,6 +3,7 @@ class CreateMatchRelationships < ActiveRecord::Migration[5.0]
     create_table :match_relationships do |t|
       t.references :participant
       t.references :match
+      t.references :league
 
       t.timestamps
     end

@@ -50,8 +50,10 @@ ActiveRecord::Schema.define(version: 20191004173950) do
   create_table "match_relationships", force: :cascade do |t|
     t.integer  "participant_id"
     t.integer  "match_id"
+    t.integer  "league_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["league_id"], name: "index_match_relationships_on_league_id"
     t.index ["match_id"], name: "index_match_relationships_on_match_id"
     t.index ["participant_id", "match_id"], name: "index_match_relationships_on_participant_id_and_match_id", unique: true
     t.index ["participant_id"], name: "index_match_relationships_on_participant_id"

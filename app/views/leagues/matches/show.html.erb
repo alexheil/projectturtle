@@ -46,7 +46,7 @@
 
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
-                  <%= @participant_one.user.wins %> - <%= @participant_one.user.losses %>
+                  <%= @participant_one.wins %> - <%= @participant_one.losses %>
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
                   <%= @participant_one.match_votes.count %>
@@ -62,12 +62,12 @@
 
                 </div>
                 <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_one.user.wins %> - <%= @participant_one.user.losses %>
+                  <%= @participant_one.wins %> - <%= @participant_one.losses %>
+                </div>
+                <div class="game-subtext padding-bottom-mini">
+                  <%= @participant_one.match_vote_id(@match).count %>
                 </div>
               <% end %>
-              <div class="game-subtext padding-bottom-mini">
-                <%= @participant_one.match_vote_id(@match).count %>
-              </div>
 
             </div>
           </div>
@@ -110,7 +110,7 @@
 
                 </div>
                 <div class="game-you-subtext padding-bottom-mini">
-                  <%= @participant_two.user.wins %> - <%= @participant_two.user.losses %>
+                  <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
                 </div>
               <% else %>
                 <div class="padding-bottom-mini game-title">
@@ -123,7 +123,7 @@
 
                 </div>
                 <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_two.user.wins %> - <%= @participant_two.user.losses %>
+                  <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
                 </div>
               <% end %>
               <div class="game-subtext padding-bottom-mini">
@@ -180,7 +180,11 @@
 
 <% if @match.participants.any? %>
 
-DEBUG</br>
+DEBUG</br></br>
+
+league.id - <%= @league.id %></br>
+
+league.match_relationships - <%= @league.match_relationships.count %></br></br>
 
 current user - <%= @current_user.id %> </br>
 participant_one.id - <%= @participant_one.id %></br>
