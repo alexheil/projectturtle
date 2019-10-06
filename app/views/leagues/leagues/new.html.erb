@@ -1,20 +1,49 @@
-<%= form_for(@league, url: game_playlist_leagues_path) do |f| %>
-  <%= render 'partials/errors/league_errors' %>
+<%= provide(:title, "Create a League") %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "text-field" %>
+<div class="container">
+
+  <div class="medium-title center padding-vertical-large">
+    Create a league
   </div>
 
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.text_field :image, class: "text-field" %>
+  <div class="form-container form-border">
+    
+    <%= form_for(@league, url: game_playlist_leagues_path) do |f| %>
+      <%= render 'partials/errors/league_errors' %>
+
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "text-field" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.text_field :image, class: "text-field" %>
+      </div>
+
+      <div class="flex">
+        <div class="field-three-column">
+          <%= f.label :number_of_participants %> <span class="dark mini-text">(MM)</span>
+          <%= f.select :number_of_participants, options_for_select(number_of_participants) %>
+        </div>
+        <div class="field-three-column">
+          <%= f.label :number_of_weeks %> <span class="dark mini-text">(DD)</span>
+          <%= f.select :number_of_weeks, options_for_select(number_of_weeks) %>
+        </div>
+        <div class="field-three-column">
+          <%= f.label :number_of_matches %> <span class="dark mini-text">(YYYY)</span>
+          <%= f.select :number_of_matches, options_for_select(number_of_matches) %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "text-field" %>
+      </div>
+
+      <%= f.submit "Create league", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+    <% end %>
+
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "text-field" %>
-  </div>
-
-  <%= f.submit "Create league", data: { disable_with: 'Creating...' }, class: "submit-button" %>
-<% end %>
+</div>

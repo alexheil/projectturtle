@@ -66,7 +66,7 @@ class Leagues::LeaguesController < ApplicationController
     end
 
     def league_params
-      params.require(:league).permit(:title, :description, :image)
+      params.require(:league).permit(:title, :description, :image, :number_of_participants, :number_of_weeks, :number_of_matches)
     end
 
 end

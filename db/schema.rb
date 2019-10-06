@@ -27,9 +27,12 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.string   "title"
     t.text     "description"
     t.string   "image"
+    t.integer  "number_of_participants", default: 2
+    t.integer  "number_of_weeks",        default: 2
+    t.integer  "number_of_matches",      default: 2
     t.string   "slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["game_id"], name: "index_leagues_on_game_id"
     t.index ["playlist_id"], name: "index_leagues_on_playlist_id"
   end

@@ -30,35 +30,35 @@
               <div class="match-container">
 
                 <div class="game-image-container link-color">
-                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id).profile.image_url(:thumb) %>">
+                  <img class="match-thumbnail-image" src="<%= match.match_relationships.first.participant.user.profile.image_url(:thumb) %>">
                   <div class="game-image-centered">
 
 
-                    <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id) %>
+                    <% if user_signed_in? && current_user == match.match_relationships.first.participant.user %>
                       <div class="padding-bottom-mini game-you-title">
                         
-                        <% if User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id).profile.display_name.present? %>
-                          <%= User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id).profile.display_name %>
+                        <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
+                          <%= match.match_relationships.first.participant.user.profile.display_name %>
                         <% else %>
-                          <%= Participant.find(match.match_relationships.first.participant_id).user.username %>
+                          <%= match.match_relationships.first.participant.user.username %>
                         <% end %>
                         
                       </div>
                       <div class="game-you-subtext padding-bottom-mini">
-                        4 - 1
+                        <%= match.match_relationships.first.participant.wins %> - <%= match.match_relationships.first.participant.losses %>
                       </div>
                     <% else %>
                       <div class="padding-bottom-mini game-title">
                         
-                        <% if User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id).profile.display_name.present? %>
-                          <%= User.friendly.find(Participant.find(match.match_relationships.first.participant_id).user_id).profile.display_name %>
+                        <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
+                          <%= match.match_relationships.first.participant.user.profile.display_name %>
                         <% else %>
-                          <%= Participant.find(match.match_relationships.first.participant_id).user.username %>
+                          <%= match.match_relationships.first.participant.user.username %>
                         <% end %>
 
                       </div>
                       <div class="game-subtext padding-bottom-mini">
-                        4 - 1
+                        <%= match.match_relationships.first.participant.wins %> - <%= match.match_relationships.first.participant.losses %>
                       </div>
                     <% end %>
 
@@ -71,35 +71,35 @@
               <div class="match-container">
 
                 <div class="game-image-container link-color">
-                  <img class="match-thumbnail-image" src="<%= User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id).profile.image_url(:thumb) %>">
+                  <img class="match-thumbnail-image" src="<%= match.match_relationships.last.participant.user.profile.image_url(:thumb) %>">
                   <div class="game-image-centered">
 
 
-                    <% if user_signed_in? && current_user == User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id) %>
+                    <% if user_signed_in? && current_user == match.match_relationships.last.participant.user %>
                       <div class="padding-bottom-mini game-you-title">
                         
-                        <% if User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id).profile.display_name.present? %>
-                          <%= User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id).profile.display_name %>
+                        <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
+                          <%= match.match_relationships.last.participant.user.profile.display_name %>
                         <% else %>
-                          <%= Participant.find(match.match_relationships.last.participant_id).user.username %>
+                          <%= match.match_relationships.last.participant.user.username %>
                         <% end %>
 
                       </div>
                       <div class="game-you-subtext padding-bottom-mini">
-                        1 - 4
+                        <%= match.match_relationships.last.participant.wins %> - <%= match.match_relationships.last.participant.losses %>
                       </div>
                     <% else %>
                       <div class="padding-bottom-mini game-title">
 
-                        <% if User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id).profile.display_name.present? %>
-                          <%= User.friendly.find(Participant.find(match.match_relationships.last.participant_id).user_id).profile.display_name %>
+                        <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
+                          <%= match.match_relationships.last.participant.user.profile.display_name %>
                         <% else %>
-                          <%= Participant.find(match.match_relationships.last.participant_id).user.username %>
+                          <%= match.match_relationships.last.participant.user.username %>
                         <% end %>
 
                       </div>
                       <div class="game-subtext padding-bottom-mini">
-                        1 - 4
+                        <%= match.match_relationships.last.participant.wins %> - <%= match.match_relationships.last.participant.losses %>
                       </div>
                     <% end %>
 

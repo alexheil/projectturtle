@@ -65,10 +65,10 @@
                       <% else %>
                         <div class="padding-bottom-mini game-title">
                           
-                          <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
-                            <%= match.match_relationships.last.participant.user.profile.display_name %>
+                          <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
+                            <%= match.match_relationships.first.participant.user.profile.display_name %>
                           <% else %>
-                            <%= match.match_relationships.last.participant.user.username %>
+                            <%= match.match_relationships.first.participant.user.username %>
                           <% end %>
 
                         </div>
@@ -153,7 +153,7 @@
                     
                   </div>
                   <div class="game-you-subtext padding-bottom-mini">
-                    <%= participant.league_match_outcome(@league).count %> - <%= participant.league_match_count(@league).count - participant.league_match_outcome(@league).count %>
+                    <%= participant.wins %> - <%= participant.losses %>
                   </div>
                 <% else %>
                   <div class="padding-bottom-mini game-title">
@@ -166,7 +166,7 @@
 
                   </div>
                   <div class="game-subtext padding-bottom-mini">
-                    <%= participant.league_match_outcome(@league).count %> - <%= participant.league_match_count(@league).count - participant.league_match_outcome(@league).count %>
+                    <%= participant.wins %> - <%= participant.losses %>
                   </div>
                 <% end %>
 
