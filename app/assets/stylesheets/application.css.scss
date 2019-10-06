@@ -247,6 +247,16 @@ select {
   vertical-align: top;
 }
 
+.field-three-column {
+  margin: 0 0 2vh 0;
+  width: 32%;
+  display: inline-block;
+  vertical-align: top;
+  select { 
+    background-position-x: 94%;
+  }
+}
+
 @mixin buttons {
   @include transition;
   width: 100%;
@@ -275,6 +285,11 @@ select {
 
 .submit-button {
   @include buttons;
+}
+
+.large-submit-button {
+  @include buttons;
+  padding: 2vh 1vw;
 }
 
 .image-button {
@@ -717,6 +732,13 @@ select {
   font-size: 3em;
   font-weight: 700;
   color: $white;
+}
+
+.game-dark-title {
+  line-height: 1em;
+  font-size: 3em;
+  font-weight: 700;
+  color: $black;
 }
 
 .game-you-title {

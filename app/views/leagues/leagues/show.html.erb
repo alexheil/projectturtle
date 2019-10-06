@@ -10,7 +10,7 @@
         <%= @league.playlist.game.title %> - <%= @league.playlist.title %>
       </div>
       <div class="game-subtext padding-bottom-mini">
-        <%= pluralize(@league.participants.count, "Participant") %>
+        <%= @league.participants.count %> / <%= pluralize(@league.number_of_participants, "Participant") %>
       </div>
       <div class="game-subtext padding-bottom-mini">
         Every Tuesday - 7 PM
@@ -18,256 +18,316 @@
     </div>
   </div>
 
-  <div class="padding-top flex">
-    <div id="first-tab-click" class="twentyfour center active-tab">
-      This Week
+  <% if @league.weeks.any? %>
+
+    <div class="padding-top flex">
+      <div id="first-tab-click" class="twentyfour center active-tab">
+        This Week
+      </div>
+      <div id="second-tab-click" class="twentyfour center inactive-tab">
+        Standings
+      </div>
+      <div id="third-tab-click" class="twentyfour center inactive-tab">
+        Schedule
+      </div>
+      <div id="fourth-tab-click" class="twentyfour center inactive-tab">
+        Players
+      </div>
     </div>
-    <div id="second-tab-click" class="twentyfour center inactive-tab">
-      Standings
-    </div>
-    <div id="third-tab-click" class="twentyfour center inactive-tab">
-      Schedule
-    </div>
-    <div id="fourth-tab-click" class="twentyfour center inactive-tab">
-      Players
-    </div>
-  </div>
 
-  <div id="first-tab">
+    <div id="first-tab">
 
-    <div class="padding-vertical flex">
-      <% @league.weeks.first.matches.each do |match| %>
-        
-        <div class="match-outer-container">
+      <div class="padding-vertical flex">
+        <% @league.weeks.first.matches.each do |match| %>
+          
+          <div class="match-outer-container">
 
-          <div class="match-image-container">
+            <div class="match-image-container">
 
-            <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @league.weeks.first, match)) do %>
+              <%= link_to(game_playlist_league_week_match_path(@game, @playlist, @league, @league.weeks.first, match)) do %>
 
-              <div class="flex">
-                <div class="match-container">
+                <div class="flex">
+                  <div class="match-container">
 
-                  <div class="game-image-container link-color">
-                    <img class="match-thumbnail-image" src="<%= match.match_relationships.first.participant.user.profile.image_url(:thumb) %>">
-                    <div class="game-image-centered">
+                    <div class="game-image-container link-color">
+                      <img class="match-thumbnail-image" src="<%= match.match_relationships.first.participant.user.profile.image_url(:thumb) %>">
+                      <div class="game-image-centered">
 
 
-                      <% if user_signed_in? && current_user == match.match_relationships.first.participant.user %>
-                        <div class="padding-bottom-mini game-you-title">
-                          
-                          <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
-                            <%= match.match_relationships.first.participant.user.profile.display_name %>
-                          <% else %>
-                            <%= match.match_relationships.first.participant.user.username %>
-                          <% end %>
-                          
-                        </div>
-                      <% else %>
-                        <div class="padding-bottom-mini game-title">
-                          
-                          <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
-                            <%= match.match_relationships.first.participant.user.profile.display_name %>
-                          <% else %>
-                            <%= match.match_relationships.first.participant.user.username %>
-                          <% end %>
+                        <% if user_signed_in? && current_user == match.match_relationships.first.participant.user %>
+                          <div class="padding-bottom-mini game-you-title">
+                            
+                            <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
+                              <%= match.match_relationships.first.participant.user.profile.display_name %>
+                            <% else %>
+                              <%= match.match_relationships.first.participant.user.username %>
+                            <% end %>
+                            
+                          </div>
+                        <% else %>
+                          <div class="padding-bottom-mini game-title">
+                            
+                            <% if match.match_relationships.first.participant.user.profile.display_name.present? %>
+                              <%= match.match_relationships.first.participant.user.profile.display_name %>
+                            <% else %>
+                              <%= match.match_relationships.first.participant.user.username %>
+                            <% end %>
 
-                        </div>
-                      <% end %>
+                          </div>
+                        <% end %>
 
 
+                      </div>
                     </div>
+
                   </div>
 
-                </div>
+                  <div class="match-container">
 
-                <div class="match-container">
-
-                  <div class="game-image-container link-color">
-                    <img class="match-thumbnail-image" src="<%= match.match_relationships.last.participant.user.profile.image_url(:thumb) %>">
-                    <div class="game-image-centered">
+                    <div class="game-image-container link-color">
+                      <img class="match-thumbnail-image" src="<%= match.match_relationships.last.participant.user.profile.image_url(:thumb) %>">
+                      <div class="game-image-centered">
 
 
-                      <% if user_signed_in? && current_user == match.match_relationships.last.participant.user %>
-                        <div class="padding-bottom-mini game-you-title">
-                          
-                          <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
-                            <%= match.match_relationships.last.participant.user.profile.display_name %>
-                          <% else %>
-                            <%= match.match_relationships.last.participant.user.username %>
-                          <% end %>
+                        <% if user_signed_in? && current_user == match.match_relationships.last.participant.user %>
+                          <div class="padding-bottom-mini game-you-title">
+                            
+                            <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
+                              <%= match.match_relationships.last.participant.user.profile.display_name %>
+                            <% else %>
+                              <%= match.match_relationships.last.participant.user.username %>
+                            <% end %>
 
-                        </div>
-                      <% else %>
-                        <div class="padding-bottom-mini game-title">
+                          </div>
+                        <% else %>
+                          <div class="padding-bottom-mini game-title">
 
-                          <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
-                            <%= match.match_relationships.last.participant.user.profile.display_name %>
-                          <% else %>
-                            <%= match.match_relationships.last.participant.user.username %>
-                          <% end %>
+                            <% if match.match_relationships.last.participant.user.profile.display_name.present? %>
+                              <%= match.match_relationships.last.participant.user.profile.display_name %>
+                            <% else %>
+                              <%= match.match_relationships.last.participant.user.username %>
+                            <% end %>
 
-                        </div>
-                      <% end %>
+                          </div>
+                        <% end %>
 
 
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
+
+              <% end %>
+
+              <div class="match-image-centered large-game-title">
+                x
               </div>
 
-            <% end %>
-
-            <div class="match-image-centered large-game-title">
-              x
             </div>
 
           </div>
 
-        </div>
-
-      <% end %>
-    </div>
-
-  </div>
-
-  <div id="second-tab">
-
-    <div class="padding-vertical flex">
-      <% @league.participants.each do |participant| %>
-        <div class="game-container">
-
-          <%= link_to(user_path(participant.user)) do %>
-            <div class="game-image-container link-color">
-              <img class="game-thumbnail-image" src="<%= participant.user.profile.image_url(:thumb) %>">
-              <div class="game-image-centered">
-                
-                <% if user_signed_in? && current_user == participant.user %>
-                  <div class="padding-bottom-mini game-you-title">
-                    
-                    <% if participant.user.profile.display_name.present? %>
-                      <%= participant.user.profile.display_name %>
-                    <% else %>
-                      <%= participant.user.username %>
-                    <% end %>
-                    
-                  </div>
-                  <div class="game-you-subtext padding-bottom-mini">
-                    <%= participant.wins %> - <%= participant.losses %>
-                  </div>
-                <% else %>
-                  <div class="padding-bottom-mini game-title">
-                    
-                    <% if participant.user.profile.display_name.present? %>
-                      <%= participant.user.profile.display_name %>
-                    <% else %>
-                      <%= participant.user.username %>
-                    <% end %>
-
-                  </div>
-                  <div class="game-subtext padding-bottom-mini">
-                    <%= participant.wins %> - <%= participant.losses %>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
-          <% end %>
-
-        </div>
-      <% end %>
-    </div>
-    
-  </div>
-
-  <div id="third-tab">
-
-    <div class="padding-vertical flex">
-      <% @league.weeks.each do |week| %>
-        <div class="game-container">
-
-          <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
-            <div class="game-image-container link-color">
-              <img class="game-thumbnail-image" src="<%= week.image %>">
-              <div class="game-image-centered">
-                <div class="padding-bottom-mini game-title">
-                  <%= week.title %>
-                </div>
-                <div class="game-subtext padding-bottom-mini">
-                  <%= pluralize(week.matches.count, "Match") %>
-                </div>
-                <div class="game-subtext">
-                  Every Tuesday - 7 PM
-                </div>
-              </div>
-            </div>
-          <% end %>
-
-        </div>
-      <% end %>
-    </div>
-    
-  </div>
-
-  <div id="fourth-tab">
-
-    <div class="padding-vertical flex">
-      <% @league.participants.each do |participant| %>
-        <div class="game-container">
-
-          <%= link_to(user_path(participant.user)) do %>
-            <div class="game-image-container link-color">
-              <img class="game-thumbnail-image" src="<%= participant.user.profile.image_url(:thumb) %>">
-              <div class="game-image-centered">
-                
-                <% if user_signed_in? && current_user == participant.user %>
-                  <div class="padding-bottom-mini game-you-title">
-                    
-                    <% if participant.user.profile.display_name.present? %>
-                      <%= participant.user.profile.display_name %>
-                    <% else %>
-                      <%= participant.user.username %>
-                    <% end %>
-                    
-                  </div>
-                  <div class="game-you-subtext padding-bottom-mini">
-                    <%= participant.user.wins %> - <%= participant.user.losses %>
-                  </div>
-                <% else %>
-                  <div class="padding-bottom-mini game-title">
-                    
-                    <% if participant.user.profile.display_name.present? %>
-                      <%= participant.user.profile.display_name %>
-                    <% else %>
-                      <%= participant.user.username %>
-                    <% end %>
-
-                  </div>
-                  <div class="game-subtext padding-bottom-mini">
-                    <%= participant.user.wins %> - <%= participant.user.losses %>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
-          <% end %>
-
-        </div>
-      <% end %>
-    </div>
-    
-  </div>
-  
-
-  <% if user_signed_in? %>
-    <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
-
-      <div class="field">
-        <%= f.hidden_field :user_id %>
+        <% end %>
       </div>
 
-      <%= f.submit "Join league", data: { disable_with: 'Creating...' }, class: "submit-button" %>
+    </div>
+
+    <div id="second-tab">
+
+      <div class="padding-vertical flex">
+        <% @league.participants.each do |participant| %>
+          <div class="game-container">
+
+            <%= link_to(user_path(participant.user)) do %>
+              <div class="game-image-container link-color">
+                <img class="game-thumbnail-image" src="<%= participant.user.profile.image_url(:thumb) %>">
+                <div class="game-image-centered">
+                  
+                  <% if user_signed_in? && current_user == participant.user %>
+                    <div class="padding-bottom-mini game-you-title">
+                      
+                      <% if participant.user.profile.display_name.present? %>
+                        <%= participant.user.profile.display_name %>
+                      <% else %>
+                        <%= participant.user.username %>
+                      <% end %>
+                      
+                    </div>
+                    <div class="game-you-subtext padding-bottom-mini">
+                      <%= participant.wins %> - <%= participant.losses %>
+                    </div>
+                  <% else %>
+                    <div class="padding-bottom-mini game-title">
+                      
+                      <% if participant.user.profile.display_name.present? %>
+                        <%= participant.user.profile.display_name %>
+                      <% else %>
+                        <%= participant.user.username %>
+                      <% end %>
+
+                    </div>
+                    <div class="game-subtext padding-bottom-mini">
+                      <%= participant.wins %> - <%= participant.losses %>
+                    </div>
+                  <% end %>
+
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+
+    <div id="third-tab">
+
+      <div class="padding-vertical flex">
+        <% @league.weeks.each do |week| %>
+          <div class="game-container">
+
+            <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
+              <div class="game-image-container link-color">
+                <img class="game-thumbnail-image" src="<%= week.image %>">
+                <div class="game-image-centered">
+                  <div class="padding-bottom-mini game-title">
+                    <%= week.title %>
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    <%= pluralize(week.matches.count, "Match") %>
+                  </div>
+                  <div class="game-subtext">
+                    Every Tuesday - 7 PM
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+
+    <div id="fourth-tab">
+
+      <div class="padding-vertical flex">
+        <% @league.participants.each do |participant| %>
+          <div class="game-container">
+
+            <%= link_to(user_path(participant.user)) do %>
+              <div class="game-image-container link-color">
+                <img class="game-thumbnail-image" src="<%= participant.user.profile.image_url(:thumb) %>">
+                <div class="game-image-centered">
+                  
+                  <% if user_signed_in? && current_user == participant.user %>
+                    <div class="padding-bottom-mini game-you-title">
+                      
+                      <% if participant.user.profile.display_name.present? %>
+                        <%= participant.user.profile.display_name %>
+                      <% else %>
+                        <%= participant.user.username %>
+                      <% end %>
+                      
+                    </div>
+                    <div class="game-you-subtext padding-bottom-mini">
+                      <%= participant.user.wins %> - <%= participant.user.losses %>
+                    </div>
+                  <% else %>
+                    <div class="padding-bottom-mini game-title">
+                      
+                      <% if participant.user.profile.display_name.present? %>
+                        <%= participant.user.profile.display_name %>
+                      <% else %>
+                        <%= participant.user.username %>
+                      <% end %>
+
+                    </div>
+                    <div class="game-subtext padding-bottom-mini">
+                      <%= participant.user.wins %> - <%= participant.user.losses %>
+                    </div>
+                  <% end %>
+
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+
+  <% else %>
+
+    <% if user_signed_in? && @league.participants.count < @league.number_of_participants %>
+      <div class="padding-bottom">
+        <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
+
+          <div class="field">
+            <%= f.hidden_field :user_id %>
+          </div>
+
+          <%= f.submit "Join league", data: { disable_with: 'Joining...' }, class: "large-submit-button" %>
+        <% end %>
+      </div>
     <% end %>
+
+    <% if @league.participants.count == @league.number_of_participants %>
+      You have enough participants. Generate league.
+    <% end %>
+
+    <div class="game-dark-title">
+      Who's in so far...
+    </div>
+
+    <div class="padding-vertical flex">
+      <% @league.participants.each do |participant| %>
+        <div class="game-container">
+
+          <%= link_to(user_path(participant.user)) do %>
+            <div class="game-image-container link-color">
+              <img class="game-thumbnail-image" src="<%= participant.user.profile.image_url(:thumb) %>">
+              <div class="game-image-centered">
+                
+                <% if user_signed_in? && current_user == participant.user %>
+                  <div class="padding-bottom-mini game-you-title">
+                    
+                    <% if participant.user.profile.display_name.present? %>
+                      <%= participant.user.profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+                    
+                  </div>
+                  <div class="game-you-subtext padding-bottom-mini">
+                    <%= participant.user.wins %> - <%= participant.user.losses %>
+                  </div>
+                <% else %>
+                  <div class="padding-bottom-mini game-title">
+                    
+                    <% if participant.user.profile.display_name.present? %>
+                      <%= participant.user.profile.display_name %>
+                    <% else %>
+                      <%= participant.user.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    <%= participant.user.wins %> - <%= participant.user.losses %>
+                  </div>
+                <% end %>
+
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+
   <% end %>
 
 
