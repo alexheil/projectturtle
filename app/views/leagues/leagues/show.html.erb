@@ -263,7 +263,12 @@
   <% else %>
 
     <% if user_signed_in? && @league.participants.count < @league.number_of_participants %>
-      <div class="padding-bottom">
+
+    <div class="padding-bottom">
+      <% if current_user.joined?(@league) %>
+        <%= link_to "Leave league", game_playlist_league_participants_path(@game, @playlist, @league, current_user.join_id(@leage)), method: :delete, class: "large-submit-button" %>
+      <% else %>
+
         <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
 
           <div class="field">
@@ -272,9 +277,12 @@
 
           <%= f.submit "Join league", data: { disable_with: 'Joining...' }, class: "large-submit-button" %>
         <% end %>
-      </div>
+
+      <% end %>
+    </div>
+
+
     <% end %>
-    
 
     <% if @league.participants.count == @league.number_of_participants %>
       You have enough participants. Generate league.

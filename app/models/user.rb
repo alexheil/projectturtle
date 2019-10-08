@@ -40,6 +40,18 @@ class User < ApplicationRecord
     end
   end
 
+  def joined?(league)
+    Participant.exists? user_id: id, league_id: video.id
+  end
+
+  def unjoin(league)
+    Participant.find_by(user_id: id, league_id: league.id).destroy
+  end
+
+  def join_id(league)
+    Participant.find_by(user_id: id, league_id: league.id).id
+  end
+
   def wins
     self.match_outcomes.count
   end
