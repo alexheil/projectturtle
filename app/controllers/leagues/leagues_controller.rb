@@ -22,6 +22,12 @@ class Leagues::LeaguesController < ApplicationController
     @league = @playlist.leagues.build(league_params)
     @league.user_id = current_user.id
     if @league.save
+      
+      Participant.create(
+        league_id: @league.id,
+        user_id: current_user.id
+      )
+
       flash[:notice] = "You just created " + @league.title + "!"
       redirect_to game_playlist_league_path(@game, @playlist, @league)
     else

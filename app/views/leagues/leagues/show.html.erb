@@ -186,11 +186,13 @@
 
       <div class="padding-vertical flex">
         <% @league.weeks.each do |week| %>
+        
+
           <div class="game-container">
 
             <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
               <div class="game-image-container link-color">
-                <img class="game-thumbnail-image" src="<%= week.image %>">
+                <div style="background: <%= week.image %>" class="game-thumbnail-image"></div>
                 <div class="game-image-centered">
                   <div class="padding-bottom-mini game-title">
                     <%= week.title %>

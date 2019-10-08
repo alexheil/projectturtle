@@ -1,6 +1,6 @@
 class Leagues::WeeksController < ApplicationController
 
-  before_action :authenticate_admin, except: :show
+  before_action :authenticate_user!, except: :show
 
   def show
     @user = current_user if user_signed_in?
@@ -23,10 +23,14 @@ class Leagues::WeeksController < ApplicationController
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
 
-    while @league.weeks.count <= @league.number_of_weeks
+    while @league.weeks.count < @league.number_of_weeks
       Week.create(
         league_id: @league.id,
-        title: "Week " + (@league.weeks.count + 1).to_s
+        title: "Week " + (@league.weeks.count + 1).to_s,
+        image: ["#AA3939", "#9B59B6", "#2471A3", "#2ECC71", 
+          "#F1C40F", "#D0D3D4", "#B03A2E", "#5D6D7E", 
+          "#145A32", "#F6DDCC", "#FADBD8", "#EAFAF1", 
+          "#17202A", "#6E2C00", "#512E5F", "#1F618D", ].sample
       )
     end
 
