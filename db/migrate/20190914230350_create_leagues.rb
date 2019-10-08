@@ -3,6 +3,7 @@ class CreateLeagues < ActiveRecord::Migration[5.0]
     create_table :leagues do |t|
       t.references :game
       t.references :playlist
+      t.references :user
       t.string :title
       t.text :description
       t.string :image

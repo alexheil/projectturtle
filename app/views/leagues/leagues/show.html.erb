@@ -1,5 +1,7 @@
 <div class="container">
 
+  <%= @league.owner_id %>-
+
   <div class="game-image-container link-color">
     <img class="game-large-image" src="<%= @league.image %>">
     <div class="game-image-centered">
@@ -289,9 +291,19 @@
     <% end %>
 
     <% if @league.participants.count == @league.number_of_participants %>
-      <div class="padding-bottom">
-        There are enough participants! <%= @league.title %> will start shortly.
-      </div>
+
+
+      <% if @league.owner_id == current_user.id %>
+        <div class="padding-bottom">
+          You are the owner
+        </div>
+      <% else %>
+        <div class="padding-bottom">
+          There are enough participants! <%= @league.title %> will start shortly.
+        </div>
+      <% end %>
+
+
     <% end %>
 
     <div class="game-dark-title">

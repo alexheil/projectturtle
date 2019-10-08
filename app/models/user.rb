@@ -13,14 +13,15 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  has_many :matches, through: :match_relationships
-  has_many :match_relationships, through: :participants
-  has_many :match_outcomes, through: :participants
-  has_many :participants, dependent: :destroy
+  has_many :matches, through: :match_relationships #after joing match
+  has_many :match_relationships, through: :participants #to join match
+  has_many :match_outcomes, through: :participants #if user wins a match
+  has_many :participants, dependent: :destroy #to join league
 
   has_many :match_votes, dependent: :destroy
 
-  belongs_to :league, optional: true
+  has_many :leagues #as owner
+  belongs_to :league, optional: true #as participants
 
   before_save :should_generate_new_friendly_id?, if: :username_changed?
   before_save :downcase_username

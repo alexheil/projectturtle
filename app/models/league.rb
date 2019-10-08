@@ -6,12 +6,14 @@ class League < ApplicationRecord
   belongs_to :game, optional: true
   belongs_to :playlist
 
-  has_many :match_relationships
   has_many :participants
-  has_many :users, through: :participants
+  has_many :users, through: :participants #participants
+
+  belongs_to :user #owner
 
   has_many :weeks, dependent: :destroy
   has_many :matches, through: :weeks
+  has_many :match_relationships
   has_many :match_outcomes
 
   validates :playlist_id, presence: true

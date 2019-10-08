@@ -1,6 +1,6 @@
 class Leagues::LeaguesController < ApplicationController
 
-  before_action :authenticate_admin, except: :show
+  before_action :authenticate_user!, except: :show
 
   def show
     @user = current_user if user_signed_in?
@@ -58,12 +58,12 @@ class Leagues::LeaguesController < ApplicationController
 
   private
 
-    def authenticate_admin
-      @owner = User.friendly.find(1)
-      unless current_user == @owner
-        redirect_to root_url
-      end
-    end
+    #def authenticate_admin
+    #  @owner = User.friendly.find(1)
+    #  unless current_user == @owner
+    #    redirect_to root_url
+    #  end
+    #end
 
     def league_params
       params.require(:league).permit(:title, :description, :image, :number_of_participants, :number_of_weeks, :number_of_matches)

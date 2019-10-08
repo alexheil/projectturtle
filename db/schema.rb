@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20191004173950) do
   create_table "leagues", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "playlist_id"
+    t.integer  "user_id"
     t.string   "title"
     t.text     "description"
     t.string   "image"
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.datetime "updated_at",                         null: false
     t.index ["game_id"], name: "index_leagues_on_game_id"
     t.index ["playlist_id"], name: "index_leagues_on_playlist_id"
+    t.index ["user_id"], name: "index_leagues_on_user_id"
   end
 
   create_table "match_outcomes", force: :cascade do |t|
