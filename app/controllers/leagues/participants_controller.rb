@@ -24,11 +24,12 @@ class Leagues::ParticipantsController < ApplicationController
   end
 
   def destroy
-    @user = User.friendly.find(params[:user_id])
+    #@user = User.friendly.find(params[:user_id])
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
-    current_user.unsave(@video)
+    current_user.unjoin(@league)
+    redirect_to game_playlist_league_path(@game, @playlist, @league)
     #respond_to do |format|
     #  format.html { redirect_to user_playlist_path(@user, @playlist) }
     #  format.js { render :action => "adds" }

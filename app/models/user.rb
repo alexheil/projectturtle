@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def joined?(league)
-    Participant.exists? user_id: id, league_id: video.id
+    Participant.exists? user_id: id, league_id: league.id
   end
 
   def unjoin(league)
