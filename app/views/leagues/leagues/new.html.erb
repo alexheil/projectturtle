@@ -11,8 +11,6 @@
     <%= form_for(@league, url: game_playlist_leagues_path) do |f| %>
       <%= render 'partials/errors/league_errors' %>
 
-      <%= hidden_field_tag :user_id, current_user.id %>
-
       <div class="field">
         <%= f.label :title %>
         <%= f.text_field :title, class: "text-field" %>

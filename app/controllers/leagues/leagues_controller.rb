@@ -20,6 +20,7 @@ class Leagues::LeaguesController < ApplicationController
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = @playlist.leagues.build(league_params)
+    @league.user_id = current_user.id
     if @league.save
       flash[:notice] = "You just created " + @league.title + "!"
       redirect_to game_playlist_league_path(@game, @playlist, @league)

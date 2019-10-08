@@ -1,7 +1,5 @@
 <div class="container">
 
-  <%= @league.owner_id %>-
-
   <div class="game-image-container link-color">
     <img class="game-large-image" src="<%= @league.image %>">
     <div class="game-image-centered">
@@ -266,36 +264,41 @@
 
     <% if user_signed_in? %>
 
-      <div class="padding-vertical">
-        <% if current_user.joined?(@league) %>
+      <% unless @league.user == current_user %>
 
-          <%= link_to "Leave league", game_playlist_league_participant_path(@game, @playlist, @league, current_user.join_id(@league)), method: :delete, class: "large-submit-button" %>
+        <div class="padding-vertical">
+          <% if current_user.joined?(@league) %>
 
-        <% else %>
+            <%= link_to "Leave league", game_playlist_league_participant_path(@game, @playlist, @league, current_user.join_id(@league)), method: :delete, class: "large-submit-button" %>
 
-          <% if @league.participants.count < @league.number_of_participants %>
-            
-            <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
+          <% else %>
 
-              <%= f.hidden_field :user_id %>
+            <% if @league.participants.count < @league.number_of_participants %>
+              
+              <%= form_for(@participant, url: game_playlist_league_participants_path(@game, @playlist, @league)) do |f| %>
 
-              <%= f.submit "Join league", data: { disable_with: 'Joining...' }, class: "large-submit-button" %>
+                <%= f.hidden_field :user_id %>
+
+                <%= f.submit "Join league", data: { disable_with: 'Joining...' }, class: "large-submit-button" %>
+              <% end %>
+
             <% end %>
 
           <% end %>
+        </div>
 
-        <% end %>
-
-      </div>
+      <% end %>
 
     <% end %>
 
     <% if @league.participants.count == @league.number_of_participants %>
 
 
-      <% if @league.owner_id == current_user.id %>
-        <div class="padding-bottom">
-          You are the owner
+      <% if @league.user == current_user %>
+        <div class="padding-vertical">
+          
+          <%= link_to "Generate league", game_playlist_league_weeks_path(@game, @playlist, @league), method: :post, class: "large-submit-button" %>
+
         </div>
       <% else %>
         <div class="padding-bottom">

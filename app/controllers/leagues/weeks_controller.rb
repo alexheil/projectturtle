@@ -22,13 +22,18 @@ class Leagues::WeeksController < ApplicationController
     @game = Game.friendly.find(params[:game_id])
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
-    @week = @league.weeks.build(week_params)
-    if @week.save
-      flash[:notice] = "You just created " + @week.title + "!"
+
+    while @league.weeks.count <= @league.number_of_weeks
+      Week.create(
+        league_id: @league.id,
+        title: "Week " + (@league.weeks.count + 1).to_s
+      )
+    end
+
+    if @league.weeks.count == @league.number_of_weeks
       redirect_to game_playlist_league_path(@game, @playlist, @league)
     else
-      flash.now[:alert] = 'Whoa! Something went wrong!'
-      render 'new'
+      redirect_to root_url
     end
   end
 
