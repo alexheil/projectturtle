@@ -47,15 +47,24 @@ class Leagues::WeeksController < ApplicationController
 
         if week.matches.count == @league.number_of_matches
           
+          #create array here
+          participant_array = @league.participants.ids
+          delete_participant_array = participant_array
+
           #create match participants
           week.matches.each do |match|
 
             while match.match_relationships.count < 2
               MatchRelationship.create(
-                participant_id: @league.participants.ids.shuffle!.pop,
+                participant_id: delete_participant_array.shuffle!.pop,
                 match_id: match.id,
                 league_id: @league_id
               )
+
+              #check to see if array is empty
+              if delete_participant_array.empty?
+                delete_participant_array = participant_array
+              end
             end
 
           end
