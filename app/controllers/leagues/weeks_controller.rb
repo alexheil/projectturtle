@@ -23,6 +23,7 @@ class Leagues::WeeksController < ApplicationController
     @playlist = Playlist.friendly.find(params[:playlist_id])
     @league = League.friendly.find(params[:league_id])
 
+    #create a number of weeks
     while @league.weeks.count < @league.number_of_weeks
       Week.create(
         league_id: @league.id,
@@ -35,6 +36,34 @@ class Leagues::WeeksController < ApplicationController
     end
 
     if @league.weeks.count == @league.number_of_weeks
+      @league.weeks.each do |week|
+
+        #create each weeks matches
+        while week.matches.count < @league.number_of_matches
+          Match.create(
+            week_id: week.id,
+          )
+        end
+
+        if week.matches.count == @league.number_of_matches
+          
+          #create match participants
+          week.matches.each do |match|
+
+            while match.match_relationships.count < 2
+              MatchRelationship.create(
+                participant_id: @league.participants.ids.shuffle!.pop,
+                match_id: match.id,
+                league_id: @league_id
+              )
+            end
+
+          end
+
+        end
+
+      end
+
       redirect_to game_playlist_league_path(@game, @playlist, @league)
     else
       redirect_to root_url

@@ -187,7 +187,6 @@
       <div class="padding-vertical flex">
         <% @league.weeks.each do |week| %>
         
-
           <div class="game-container">
 
             <%= link_to(game_playlist_league_week_path(@game, @playlist, @league, week)) do %>
@@ -208,6 +207,7 @@
             <% end %>
 
           </div>
+          
         <% end %>
       </div>
       
