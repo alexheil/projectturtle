@@ -3,6 +3,19 @@ class Leagues::MatchVotesController < ApplicationController
   before_action :authenticate_user!
   before_action :vote_user_is_participant, only: :create
   before_action :not_able_to_unvote, only: :destroy
+
+  def new
+    @user = current_user
+    @game = Game.friendly.find(params[:game_id])
+    @playlist = Playlist.friendly.find(params[:playlist_id])
+    @league = League.friendly.find(params[:league_id])
+    @week = Week.friendly.find(params[:week_id])
+    @match = Match.friendly.find(params[:match_id])
+    @participant_one = Participant.find(@match.match_relationships.first.participant_id)
+    @participant_two = Participant.find(@match.match_relationships.last.participant_id)
+    @match_vote = MatchVote.new(vote_params)
+    @match_vote.match_id = @match.id
+  end
   
   def create
     @user = current_user
@@ -18,19 +31,27 @@ class Leagues::MatchVotesController < ApplicationController
 
     if @match_vote.save
 
-      #check to see if a participant has enough votes to win 
-      if @participant_one.match_vote_id(@match).count == 2
-        create_match_outcome(@match)
-      elsif @participant_two.match_vote_id(@match).count == 2
-        create_match_outcome(@match)
+      @match_proof = @match_vote.create_match_proof(proof_params)
+      @match_proof.match_id = @match.id
+      @match_proof.match_vote_id = @match_vote.id
+
+      if @match_proof.save
+
+        #check to see if a participant has enough votes to win 
+        if @participant_one.match_vote_id(@match).count == 2
+          create_match_outcome(@match)
+        elsif @participant_two.match_vote_id(@match).count == 2
+          create_match_outcome(@match)
+        else
+          puts "need more votes"
+        end
+        
+        redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
       else
-        puts "need more votes"
+        redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
+        flash[:alert] = "You have failed."
       end
 
-      redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
-    else
-      render 'new'
-      flash[:alert] = "You have failed."
     end
 
   end
@@ -95,6 +116,10 @@ class Leagues::MatchVotesController < ApplicationController
 
       def vote_params
         params.permit(:match_id, :participant_id, :user_id, :image, :remove_image, :description)
+      end
+
+      def proof_params
+        params.require(:match_proof).permit(:image, :remove_image, :description)
       end
 
       # give certain amount of time until you cannot unvote

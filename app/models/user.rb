@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  has_many :matches, through: :match_relationships #after joing match
+  has_many :matches, through: :match_relationships #after joining match
   has_many :match_relationships, through: :participants #to join match
   has_many :match_outcomes, through: :participants #if user wins a match
   has_many :participants, dependent: :destroy #to join league

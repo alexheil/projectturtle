@@ -12,6 +12,7 @@ class Leagues::MatchesController < ApplicationController
     @match = Match.friendly.find(params[:id])
     @match_relationship = MatchRelationship.new
     @match_vote = MatchVote.new
+    @match_proof = MatchProof.new
     if @match.match_relationships.any?
       @participant_one = Participant.find(@match.match_relationships.first.participant_id)
       @user_one = User.friendly.find(@participant_one.user_id)

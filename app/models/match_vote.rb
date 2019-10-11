@@ -1,6 +1,6 @@
 class MatchVote < ApplicationRecord
 
-  include ImageUploader[:image]
+  has_one :match_proof, dependent: :destroy
 
   belongs_to :participant
   belongs_to :match

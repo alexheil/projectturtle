@@ -1,238 +1,306 @@
-<% if @match.match_relationships.any? %>
-<div class="container">
+<div class="wrapper">
+  <% if @match.match_relationships.any? %>
+  <div class="container">
 
-  <% if @match.match_outcome.present? %>
-    <div class="padding-bottom">
-      <div class="winners-block center game-title">
-
-        <% if @match.match_outcome.participant.user.profile.display_name.present? %>
-          <%= @match.match_outcome.participant.user.profile.display_name %> wins!
-        <% else %>
-          <%= @match.match_outcome.participant.user.username %> wins!
-        <% end %>
-
-      </div>
-    </div>
-  <% end %>
-
-  <div class="match-image-container">
-
-    <div class="flex">
-
-      <div class="match-show-container">
-
-        <%= link_to(user_path(@user_one)) do %>
-
-          <div class="match-large-image-container link-color">
-            <img class="match-large-image" src="<%= @user_one.profile.image_url(:thumb) %>">
-            <div class="game-image-centered">
-
-
-              <% if user_signed_in? && current_user == @user_one %>
-                <div class="padding-bottom-mini game-you-title">
-
-                  <% if @user_one.profile.display_name.present? %>
-                    <%= @user_one.profile.display_name %>
-                  <% else %>
-                    <%= @user_one.username %>
-                  <% end %>
-
-                </div>
-                <div class="game-you-subtext padding-bottom-mini">
-                  <%= @participant_one.wins %> - <%= @participant_one.losses %>
-                </div>
-              <% else %>
-                <div class="padding-bottom-mini game-title">
-                  
-                  <% if @user_one.profile.display_name.present? %>
-                    <%= @user_one.profile.display_name %>
-                  <% else %>
-                    <%= @user_one.username %>
-                  <% end %>
-
-                </div>
-                <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_one.wins %> - <%= @participant_one.losses %>
-                </div>
-                <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_one.match_vote_id(@match).count %>
-                </div>
-              <% end %>
-
-            </div>
-          </div>
-
-        <% end %>
-
-      </div>
-
-
-      <div class="match-show-container">
-
-        <%= link_to(user_path(@user_two)) do %>
-
-          <div class="match-large-image-container link-color">
-            <img class="match-large-image" src="<%= @user_two.profile.image_url(:thumb) %>">
-            <div class="game-image-centered">
-
-
-              <% if user_signed_in? && current_user == @user_two %>
-                <div class="padding-bottom-mini game-you-title">
-                  
-                  <% if @user_two.profile.display_name.present? %>
-                    <%= @user_two.profile.display_name %>
-                  <% else %>
-                    <%= @user_two.username %>
-                  <% end %>
-
-                </div>
-                <div class="game-you-subtext padding-bottom-mini">
-                  <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
-                </div>
-              <% else %>
-                <div class="padding-bottom-mini game-title">
-                  
-                  <% if @user_two.profile.display_name.present? %>
-                    <%= @user_two.profile.display_name %>
-                  <% else %>
-                    <%= @user_two.username %>
-                  <% end %>
-
-                </div>
-                <div class="game-subtext padding-bottom-mini">
-                  <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
-                </div>
-              <% end %>
-              <div class="game-subtext padding-bottom-mini">
-                <%= @participant_two.match_vote_id(@match).count %>
-              </div>
-
-
-            </div>
-          </div>
-
-        <% end %>
-
-      </div>
-
-    </div>
-
-    <div class="match-image-centered large-x">
-      x
-    </div>
-
-  </div>
-
-  <div class="flex padding-vertical">
-
-    <div class="match-show-container">
-
+    <% if @match.match_outcome.present? %>
       <div class="padding-bottom">
-        <div class="voters-block center game-dark-title">
-          <%= pluralize(@participant_one.match_votes.count, "vote") %>
+        <div class="winners-block center game-title">
+
+          <% if @match.match_outcome.participant.user.profile.display_name.present? %>
+            <%= @match.match_outcome.participant.user.profile.display_name %> wins!
+          <% else %>
+            <%= @match.match_outcome.participant.user.username %> wins!
+          <% end %>
+
         </div>
       </div>
+    <% end %>
 
-      <% if @match.match_outcome.blank? %>
-        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
-          <div class="padding-bottom">
+    <div class="match-image-container">
 
-            <% if current_user.voted?(@match, @participant_two) %>
+      <div class="flex">
 
-              <div class="submit-button">
-                Vote locked.
+        <div class="match-show-container">
+
+          <%= link_to(user_path(@user_one)) do %>
+
+            <div class="match-large-image-container link-color">
+              <img class="match-large-image" src="<%= @user_one.profile.image_url(:thumb) %>">
+              <div class="game-image-centered">
+
+
+                <% if user_signed_in? && current_user == @user_one %>
+                  <div class="padding-bottom-mini game-you-title">
+
+                    <% if @user_one.profile.display_name.present? %>
+                      <%= @user_one.profile.display_name %>
+                    <% else %>
+                      <%= @user_one.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-you-subtext padding-bottom-mini">
+                    <%= @participant_one.wins %> - <%= @participant_one.losses %>
+                  </div>
+                <% else %>
+                  <div class="padding-bottom-mini game-title">
+                    
+                    <% if @user_one.profile.display_name.present? %>
+                      <%= @user_one.profile.display_name %>
+                    <% else %>
+                      <%= @user_one.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    <%= @participant_one.wins %> - <%= @participant_one.losses %>
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    <%= @participant_one.match_vote_id(@match).count %>
+                  </div>
+                <% end %>
+
               </div>
+            </div>
 
-            <% elsif current_user.voted?(@match, @participant_one) %>
+          <% end %>
 
-              <% if current_user.vote(@match).created_at <= Time.now - 5.minutes %>
+        </div>
+
+
+        <div class="match-show-container">
+
+          <%= link_to(user_path(@user_two)) do %>
+
+            <div class="match-large-image-container link-color">
+              <img class="match-large-image" src="<%= @user_two.profile.image_url(:thumb) %>">
+              <div class="game-image-centered">
+
+
+                <% if user_signed_in? && current_user == @user_two %>
+                  <div class="padding-bottom-mini game-you-title">
+                    
+                    <% if @user_two.profile.display_name.present? %>
+                      <%= @user_two.profile.display_name %>
+                    <% else %>
+                      <%= @user_two.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-you-subtext padding-bottom-mini">
+                    <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
+                  </div>
+                <% else %>
+                  <div class="padding-bottom-mini game-title">
+                    
+                    <% if @user_two.profile.display_name.present? %>
+                      <%= @user_two.profile.display_name %>
+                    <% else %>
+                      <%= @user_two.username %>
+                    <% end %>
+
+                  </div>
+                  <div class="game-subtext padding-bottom-mini">
+                    <%= @participant_two.league_match_outcome(@league).count %> - <%= @participant_two.league_match_count(@league).count - @participant_two.league_match_outcome(@league).count %>
+                  </div>
+                <% end %>
+                <div class="game-subtext padding-bottom-mini">
+                  <%= @participant_two.match_vote_id(@match).count %>
+                </div>
+
+
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+      <div class="match-image-centered large-x">
+        x
+      </div>
+
+    </div>
+
+    <div class="flex padding-vertical">
+
+      <div class="match-show-container">
+
+        <div class="padding-bottom">
+          <div class="voters-block center game-dark-title">
+            <%= pluralize(@participant_one.match_votes.count, "vote") %>
+          </div>
+        </div>
+
+        <% if @match.match_outcome.blank? %>
+          <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
+            <div class="padding-bottom">
+
+              <% if current_user.voted?(@match, @participant_two) %>
 
                 <div class="submit-button">
                   Vote locked.
                 </div>
 
+              <% elsif current_user.voted?(@match, @participant_one) %>
+
+                <% if current_user.vote(@match).created_at <= Time.now - 5.minutes %>
+
+                  <div class="submit-button">
+                    Vote locked.
+                  </div>
+
+                <% else %>
+
+                <%= current_user.vote(@match).match_proof.description %>
+
+                  <%= link_to "Unvote", game_playlist_league_week_match_match_vote_path(@game, @playlist, @league, @week, @match, current_user.vote_id(@match)), method: :delete, class: "submit-button" %>
+
+                <% end %>
+
               <% else %>
 
-                <%= link_to "Unvote", game_playlist_league_week_match_match_vote_path(@game, @playlist, @league, @week, @match, current_user.vote_id(@match)), method: :delete, class: "submit-button" %>
+                <div id="match-vote-form-click-one" class=submit-button>
+                  Click here to vote
+                </div>
 
               <% end %>
 
-            <% else %>
-
-            <div id="match-vote-form" class=submit-button>
-              Click here to vote
             </div>
-
-              <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
-
-                <%= hidden_field_tag :user_id, @user.id %>
-                <%= hidden_field_tag :participant_id, @participant_one.id %>
-
-                <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
-              <% end %>
-
-            <% end %>
-
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
 
-    </div>
-
-    <div class="match-show-container">
-
-      <div class="padding-bottom">
-        <div class="voters-block center game-dark-title">
-          <%= pluralize(@participant_two.match_votes.count, "vote") %>
-        </div>
       </div>
 
-      <% if @match.match_outcome.blank? %>
-        <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
-          <div class="padding-bottom">
+      <div class="match-show-container">
 
-            <% if current_user.voted?(@match, @participant_one) %>
+        <div class="padding-bottom">
+          <div class="voters-block center game-dark-title">
+            <%= pluralize(@participant_two.match_votes.count, "vote") %>
+          </div>
+        </div>
 
-              <div class="submit-button">
-                Vote locked.
-              </div>
+        <% if @match.match_outcome.blank? %>
+          <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
+            <div class="padding-bottom">
 
-            <% elsif current_user.voted?(@match, @participant_two) %>
+              <% if current_user.voted?(@match, @participant_one) %>
 
-              <% if current_user.vote(@match).created_at <= Time.now - 5.minutes %>
+                <div class="submit-button">
+                  Vote locked.
+                </div>
 
-              <div class="submit-button">
-                Vote locked.
-              </div>
+              <% elsif current_user.voted?(@match, @participant_two) %>
+
+                <% if current_user.vote(@match).created_at <= Time.now - 5.minutes %>
+
+                <div class="submit-button">
+                  Vote locked.
+                </div>
+
+                <% else %>
+                
+                <%= current_user.vote(@match).match_proof.description %>
+
+                  <%= link_to "Unvote", game_playlist_league_week_match_match_vote_path(@game, @playlist, @league, @week, @match, current_user.vote_id(@match)), method: :delete, class: "submit-button" %>
+
+                <% end %>
 
               <% else %>
 
-                <%= link_to "Unvote", game_playlist_league_week_match_match_vote_path(@game, @playlist, @league, @week, @match, current_user.vote_id(@match)), method: :delete, class: "submit-button" %>
+                <div id="match-vote-form-click-two" class=submit-button>
+                  Click here to vote
+                </div>
 
               <% end %>
 
-            <% else %>
-
-              <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
-
-                <%= hidden_field_tag :user_id, @user.id %>
-                <%= hidden_field_tag :participant_id, @participant_two.id %>
-
-                <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
-              <% end %>
-
-            <% end %>
-
-          </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+
+      </div>
 
     </div>
 
   </div>
 
+  <% end %>
 </div>
 
+<% if @match.match_outcome.blank? %>
+  <% if user_signed_in? && (@user.id == @participant_one.user_id) || (@user.id == @participant_two.user_id) || (@user == @owner) %>
+
+    <div id="match-vote-form-container-one">
+      <div class="popup-form-inside">
+        <div class="close"></div>
+
+        <% if current_user.voted?(@match, @participant_two) %>
+
+        <% elsif current_user.voted?(@match, @participant_one) %>
+
+        <% else %>
+
+          <div class="padding-bottom center medium-title">
+            Vote for <%= @user_one.username %>
+          </div>
+
+          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+
+            <%= hidden_field_tag :user_id, @user.id %>
+            <%= hidden_field_tag :participant_id, @participant_one.id %>
+
+              <%= fields_for :match_proof, @match_proof do |u| %>
+                <div class="field">
+                  <%= u.label :description %>
+                  <%= u.text_area :description, class: "text-area" %>
+                </div>
+              <% end %>
+
+            <%= f.submit "Vote for #{@user_one.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
+          <% end %>
+
+        <% end %>
+
+      </div>
+    </div>
+
+    <div id="match-vote-form-container-two">
+      <div class="popup-form-inside">
+        <div class="close"></div>
+
+        <% if current_user.voted?(@match, @participant_one) %>
+
+        <% elsif current_user.voted?(@match, @participant_two) %>
+
+        <% else %>
+
+          <div class="padding-bottom center medium-title">
+            Vote for <%= @user_two.username %>
+          </div>
+
+          <%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+
+            <%= hidden_field_tag :user_id, @user.id %>
+            <%= hidden_field_tag :participant_id, @participant_two.id %>
+
+              <%= fields_for :match_proof, @match_proof do |u| %>
+                <div class="field">
+                  <%= u.label :description %>
+                  <%= u.text_area :description, class: "text-area" %>
+                </div>
+              <% end %>
+
+            <%= f.submit "Vote for #{@user_two.profile.display_name}", data: { disable_with: 'Voting...' }, class: "submit-button" %>
+          <% end %>
+
+        <% end %>
+
+      </div>
+    </div>
+
+  <% end %>
 <% end %>
 
 
@@ -285,3 +353,8 @@ who wins? - participant <%= @match.match_outcome.participant.id if @match.match_
 current user wins count - <%= @user.match_outcomes.count %></br>
 
 <% end %>
+
+
+
+
+

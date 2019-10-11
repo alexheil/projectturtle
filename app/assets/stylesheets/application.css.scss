@@ -91,6 +91,10 @@ img {
   display: none;
 }
 
+.blur {
+  -webkit-filter: blur(4px);
+}
+
 .center {
   text-align: center;
 }
@@ -108,6 +112,12 @@ img {
 
 .darkgrey {
   color: $darkgrey;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .container {
@@ -884,6 +894,122 @@ select {
 
 #second-tab, #third-tab, #fourth-tab {
   display: none;
+}
+
+/* ******************* JAVASCRIPTS ************ */
+
+@mixin javascriptForms {
+  padding: 0vh 2vw;
+  position: absolute;
+  top: 2vh;
+  left: 26vw;
+  min-width: 40%;
+  max-width: 40%;
+  margin: 0 0% 0 0;
+  z-index: 1005;
+  display: none;
+  .popup-form-inside {
+    width: 100%;
+    background: $white;
+    padding: 2vh 2vw;
+    border-radius: $radius;
+    box-shadow: $shadow-lite;
+    margin-bottom: 2vh;
+  }
+  a {
+    color: $light;
+    &:hover {
+      color: $dark;
+    }
+  }
+}
+
+.close {
+  display: block;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  color: $black;
+  text-decoration: none;
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  &:before {
+    content: "";
+    display: block;
+    height: 30px;
+    width: 2px;
+    z-index: 1001;
+    background: $black;
+    position: absolute;
+    left: 11px;
+    top: 0px;
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg);
+    -webkit-transition: .3s;
+   -moz-transition: .3s;
+   -o-transition: .3s;
+  }
+  &:after {
+    content: "";
+    display: block;
+    height: 30px;
+    width: 2px;
+    z-index: 1001;
+    background: $black;
+    position: absolute;
+    left: 11px;
+    top: 0px;
+    -webkit-transform:rotate(-45deg);
+    -moz-transform:rotate(-45deg);
+    -o-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+  }
+  &:hover {
+    &:before {
+      background: $main;
+      -webkit-transition: .3s;
+      -moz-transition: .3s;
+      -o-transition: .3s;
+    }
+    &:after {
+      background: $main;
+      -webkit-transition: .3s;
+      -moz-transition: .3s;
+      -o-transition: .3s;
+    }
+  }
+}
+
+.back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.80;
+  -khtml-opacity: 0.80;
+  opacity: 0.80;
+  z-index: 1002;
+  display: none;
+}
+
+#match-vote-form-container-one {
+  @include javascriptForms;
+}
+
+#match-vote-form-container-two {
+  @include javascriptForms;
 }
 
 /* ***************** MEDIA QUERIES ************* */

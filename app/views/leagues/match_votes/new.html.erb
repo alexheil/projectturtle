@@ -1,0 +1,13 @@
+<%= form_for(@match_vote, url: game_playlist_league_week_match_match_votes_path(@game, @playlist, @league, @week, @match)) do |f| %>
+<span id="match_votes_errors"><%= render 'partials/errors/match_votes_errors' %></span>
+
+  <%= hidden_field_tag :user_id, @user.id %>
+  <%= hidden_field_tag :participant_id, @participant_one.id %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "text-area" %>
+  </div>
+
+  <%= f.submit "Vote for ", data: { disable_with: 'Voting...' }, class: "submit-button" %>
+<% end %>

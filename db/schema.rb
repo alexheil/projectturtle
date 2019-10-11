@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191004173950) do
+ActiveRecord::Schema.define(version: 20191011173110) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.index ["participant_id"], name: "index_match_outcomes_on_participant_id"
   end
 
+  create_table "match_proofs", force: :cascade do |t|
+    t.integer  "match_id"
+    t.integer  "match_vote_id"
+    t.text     "image_data"
+    t.text     "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["match_id"], name: "index_match_proofs_on_match_id"
+    t.index ["match_vote_id"], name: "index_match_proofs_on_match_vote_id"
+  end
+
   create_table "match_relationships", force: :cascade do |t|
     t.integer  "participant_id"
     t.integer  "match_id"
@@ -68,8 +79,6 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.integer  "user_id"
     t.integer  "match_id"
     t.integer  "participant_id"
-    t.text     "image_data"
-    t.text     "description"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["match_id"], name: "index_match_votes_on_match_id"

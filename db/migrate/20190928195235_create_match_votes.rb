@@ -4,8 +4,6 @@ class CreateMatchVotes < ActiveRecord::Migration[5.0]
       t.references :user
       t.references :match
       t.references :participant
-      t.text :image_data
-      t.text :description
 
       t.timestamps
     end
