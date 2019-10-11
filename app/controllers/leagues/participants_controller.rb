@@ -1,6 +1,8 @@
 class Leagues::ParticipantsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :league_locked
+  before_action :too_many_participants, only: :create
   
   def create
     @user = current_user
@@ -36,5 +38,25 @@ class Leagues::ParticipantsController < ApplicationController
     #  flash.now[:notice] = "You removed #{@video.title} from #{@playlist.title}!"
     #end
   end
+
+  private
+
+    #make sure you cannot have more participants than league allows
+    def too_many_participants
+      @league = League.friendly.find(params[:league_id])
+
+      if @league.participants.count == @league.number_of_participants
+        redirect_to redirect_to game_playlist_league_path(@game, @playlist, @league)
+      end
+    end
+
+    #cannot join or leave if league is started
+    def league_locked
+      @league = League.friendly.find(params[:league_id])
+
+      if @league.weeks.any?
+        redirect_to redirect_to game_playlist_league_path(@game, @playlist, @league)
+      end
+    end
 
 end

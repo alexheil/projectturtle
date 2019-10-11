@@ -638,6 +638,30 @@ select {
 
 /* ************************ GAMES ************************ */
 
+.winners-block {
+  @include transition;
+  box-sizing: border-box;
+  background: $green;
+  color: $white;
+  padding: 2vh 0;
+  border-radius: $radius;
+  font-size: .75em;
+  font-weight: 700;
+  box-shadow: $shadow-lite;
+}
+
+.voters-block {
+  @include transition;
+  box-sizing: border-box;
+  background: $grey;
+  color: $black;
+  padding: 2vh 0;
+  border-radius: $radius;
+  font-size: .75em;
+  font-weight: 700;
+  box-shadow: $shadow-lite;
+}
+
 .match-outer-container {
   @include transition;
   margin: 0;
@@ -861,3 +885,80 @@ select {
 #second-tab, #third-tab, #fourth-tab {
   display: none;
 }
+
+/* ***************** MEDIA QUERIES ************* */
+
+@media screen and (max-width: 1024px) {
+
+  .form-container {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .flash {
+    width: 96%;
+    left: 2%;
+  }
+
+  @mixin mobile-nav {
+    float: none;
+    text-align: center;
+  }
+
+  .nav {
+    display: block;
+    .site-title {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 2vh;
+    }
+    ul {
+      width: 100%;
+      display: block;
+      text-align: center;
+      li {
+        width: 30%;
+        text-align: center;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    span {
+      @include mobile-nav;
+    }
+    ul {
+      @include mobile-nav;
+    }
+  }
+
+  #menu-container {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .side-menu {
+    ul {
+      text-align: center;
+      li {
+        text-align: center;
+      }
+    }
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 2vh 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+}
+
+

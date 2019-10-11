@@ -53,6 +53,22 @@ class User < ApplicationRecord
     Participant.find_by(user_id: id, league_id: league.id).id
   end
 
+  def voted?(match, participant)
+    MatchVote.exists? user_id: id, match_id: match.id, participant_id: participant.id
+  end
+
+  def unvote(match)
+    MatchVote.find_by(user_id: id, match_id: match.id).destroy
+  end
+
+  def vote_id(match)
+    MatchVote.find_by(user_id: id, match_id: match.id).id
+  end
+
+  def vote(match)
+    MatchVote.find_by(user_id: id, match_id: match.id)
+  end
+
   def wins
     self.match_outcomes.count
   end

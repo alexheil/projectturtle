@@ -31,7 +31,7 @@ class Leagues::WeeksController < ApplicationController
         image: ["#AA3939", "#9B59B6", "#2471A3", "#2ECC71", 
           "#F1C40F", "#D0D3D4", "#B03A2E", "#5D6D7E", 
           "#145A32", "#F6DDCC", "#FADBD8", "#EAFAF1", 
-          "#17202A", "#6E2C00", "#512E5F", "#1F618D", ].sample
+          "#17202A", "#6E2C00", "#512E5F", "#1F618D"].sample
       )
     end
 
@@ -39,31 +39,35 @@ class Leagues::WeeksController < ApplicationController
       @league.weeks.each do |week|
 
         #create each weeks matches
-        while week.matches.count < @league.number_of_matches
+        while week.matches.count < (@league.number_of_matches * @league.number_of_participants / 2)
           Match.create(
             week_id: week.id,
           )
         end
 
-        if week.matches.count == @league.number_of_matches
+        if week.matches.count == (@league.number_of_matches * @league.number_of_participants / 2)
           
           #create array here
           participant_array = @league.participants.ids
-          delete_participant_array = participant_array
+          delete_participant_array = participant_array.map do |e|
+            e.dup 
+          end
 
           #create match participants
           week.matches.each do |match|
 
             while match.match_relationships.count < 2
               MatchRelationship.create(
-                participant_id: delete_participant_array.shuffle!.pop,
+                participant_id: delete_participant_array.delete(delete_participant_array.sample),
                 match_id: match.id,
                 league_id: @league_id
               )
 
               #check to see if array is empty
               if delete_participant_array.empty?
-                delete_participant_array = participant_array
+                delete_participant_array = participant_array.map do |e|
+                  e.dup 
+                end
               end
             end
 

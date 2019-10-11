@@ -2,6 +2,7 @@ class Leagues::MatchVotesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :vote_user_is_participant, only: :create
+  before_action :not_able_to_unvote, only: :destroy
   
   def create
     @user = current_user
@@ -40,8 +41,9 @@ class Leagues::MatchVotesController < ApplicationController
     @league = League.friendly.find(params[:league_id])
     @week = Week.friendly.find(params[:week_id])
     @match = Match.friendly.find(params[:match_id])
-    @participant = Participant.find(params[:participant_id])
     @match_vote = MatchVote.find(params[:id])
+    current_user.unvote(@match)
+    redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
   end
 
     private
@@ -96,10 +98,11 @@ class Leagues::MatchVotesController < ApplicationController
       end
 
       # give certain amount of time until you cannot unvote
-      #def not_able_to_unvote
-        #if @match_vote.created_at (3:43) <= Time.now - 5.minutes (3:45)
-          #redirect_to root_url
-        #end
-      #end
+      def not_able_to_unvote
+        @match_vote = MatchVote.find(params[:id])
+        if @match_vote.created_at <= Time.now - 5.minutes
+          redirect_to root_url
+        end
+      end
 
 end
