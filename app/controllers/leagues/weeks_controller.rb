@@ -1,6 +1,7 @@
 class Leagues::WeeksController < ApplicationController
 
   before_action :authenticate_user!, except: :show
+  before_action :need_participants, only: :create
 
   def show
     @user = current_user if user_signed_in?
@@ -114,6 +115,17 @@ class Leagues::WeeksController < ApplicationController
   end
 
   private
+
+    def need_participants
+      @game = Game.friendly.find(params[:game_id])
+      @playlist = Playlist.friendly.find(params[:playlist_id])
+      @league = League.friendly.find(params[:league_id])
+
+      unless @league.participants.count == @league.number_of_participants
+        redirect_to game_playlist_league_path(@game, @playlist, @league)
+      end
+
+    end
 
     def authenticate_admin
       @owner = User.friendly.find(1)

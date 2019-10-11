@@ -43,6 +43,8 @@ class Leagues::ParticipantsController < ApplicationController
 
     #make sure you cannot have more participants than league allows
     def too_many_participants
+      @game = Game.friendly.find(params[:game_id])
+      @playlist = Playlist.friendly.find(params[:playlist_id])
       @league = League.friendly.find(params[:league_id])
 
       if @league.participants.count == @league.number_of_participants
@@ -52,6 +54,8 @@ class Leagues::ParticipantsController < ApplicationController
 
     #cannot join or leave if league is started
     def league_locked
+      @game = Game.friendly.find(params[:game_id])
+      @playlist = Playlist.friendly.find(params[:playlist_id])
       @league = League.friendly.find(params[:league_id])
 
       if @league.weeks.any?
