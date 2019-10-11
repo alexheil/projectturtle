@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20191004173950) do
     t.integer  "user_id"
     t.integer  "match_id"
     t.integer  "participant_id"
+    t.text     "image_data"
+    t.text     "description"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["match_id"], name: "index_match_votes_on_match_id"

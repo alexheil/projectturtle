@@ -94,7 +94,7 @@ class Leagues::MatchVotesController < ApplicationController
       end
 
       def vote_params
-        params.permit(:match_id, :participant_id, :user_id)
+        params.permit(:match_id, :participant_id, :user_id, :image, :remove_image, :description)
       end
 
       # give certain amount of time until you cannot unvote
