@@ -21,7 +21,7 @@ class ImageUploader < Shrine
   end
 
   Attacher.validate do
-    validate_max_size 15.megabyte, message: "is too large (max is 1 MB)"
+    validate_max_size 2.megabyte, message: "is too large (max is 2 MB)"
     validate_mime_type_inclusion ['image/jpg', 'image/jpeg', 'image/png']
   end
 

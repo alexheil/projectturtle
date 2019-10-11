@@ -1,5 +1,7 @@
 class MatchVote < ApplicationRecord
 
+  include ImageUploader[:image]
+
   belongs_to :participant
   belongs_to :match
   belongs_to :user
