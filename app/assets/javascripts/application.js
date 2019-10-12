@@ -51,6 +51,12 @@ var getFilename = function() {
     $('.file-name-image').addClass('padding-top');
   });
 
+  $('input[type="file"].proof_image').change(function(e){
+    var fileName = e.target.files[0].name;
+    $('.file-name-image').text(fileName);
+    $('.file-name-image').addClass('padding-top');
+  });
+
 };
 
 $(document).ready(getFilename);
@@ -180,7 +186,7 @@ var formClicks = function() {
 
   $('.close').click(function() {
     $('#match-vote-form-container-one').fadeOut(300);
-    $('#match-vote-form-container').fadeOut(300);
+    $('#match-vote-form-container-two').fadeOut(300);
     $('.back').fadeOut(300);
     $('.wrapper').removeClass('blur', 300);
     $('.background').removeClass('blur', 300);
@@ -189,7 +195,7 @@ var formClicks = function() {
 
   $('.back').click(function() {
     $('#match-vote-form-container-one').fadeOut(300);
-    $('#match-vote-form-container').fadeOut(300);
+    $('#match-vote-form-container-two').fadeOut(300);
     $('.back').fadeOut(300);
     $('.wrapper').removeClass('blur', 300);
     $('.background').removeClass('blur', 300);

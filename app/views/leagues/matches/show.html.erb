@@ -201,7 +201,7 @@
                 </div>
 
                 <% else %>
-                
+
                 <%= current_user.vote(@match).match_proof.description %>
 
                   <%= link_to "Unvote", game_playlist_league_week_match_match_vote_path(@game, @playlist, @league, @week, @match, current_user.vote_id(@match)), method: :delete, class: "submit-button" %>
@@ -286,6 +286,15 @@
             <%= hidden_field_tag :participant_id, @participant_two.id %>
 
               <%= fields_for :match_proof, @match_proof do |u| %>
+
+
+                <div class="padding-bottom">
+                  <label class="image-button" for="proof-image">Upload proof</label>
+                  <%= f.hidden_field :image, value: @match_proof.cached_image_data %>
+                  <span class="hidden"><%= f.file_field :image, id: "proof-image", class: "proof_image" %></span>
+                  <div class="file-name-image"></div>
+                </div>
+
                 <div class="field">
                   <%= u.label :description %>
                   <%= u.text_area :description, class: "text-area" %>

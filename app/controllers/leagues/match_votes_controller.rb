@@ -49,6 +49,7 @@ class Leagues::MatchVotesController < ApplicationController
 
         redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match) 
       else
+        current_user.unvote(@match)
         redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
         flash[:alert] = "You have failed."
       end
