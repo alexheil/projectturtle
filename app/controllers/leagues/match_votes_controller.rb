@@ -31,6 +31,7 @@ class Leagues::MatchVotesController < ApplicationController
 
     if @match_vote.save
 
+      #create proof that match deserves vote
       @match_proof = @match_vote.create_match_proof(proof_params)
       @match_proof.match_id = @match.id
       @match_proof.match_vote_id = @match_vote.id
@@ -45,8 +46,8 @@ class Leagues::MatchVotesController < ApplicationController
         else
           puts "need more votes"
         end
-        
-        redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
+
+        redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match) 
       else
         redirect_to game_playlist_league_week_match_path(@game, @playlist, @league, @week, @match)
         flash[:alert] = "You have failed."
