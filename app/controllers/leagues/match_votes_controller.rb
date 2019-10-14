@@ -32,7 +32,7 @@ class Leagues::MatchVotesController < ApplicationController
     if @match_vote.save
 
       #create proof that match deserves vote
-      @match_proof = @match_vote.create_match_proof(proof_params)
+      @match_proof = MatchProof.new(proof_params)
       @match_proof.match_id = @match.id
       @match_proof.match_vote_id = @match_vote.id
 
@@ -117,7 +117,7 @@ class Leagues::MatchVotesController < ApplicationController
       end
 
       def vote_params
-        params.permit(:match_id, :participant_id, :user_id, :image, :remove_image, :description)
+        params.permit(:match_id, :participant_id, :user_id)
       end
 
       def proof_params

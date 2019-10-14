@@ -39,7 +39,8 @@
           </div>
         </div>
       <% else %>
-        <div class="padding-bottom">
+        <div class="field">
+          <%= f.label :image, "Upload a profile picture" %>
           <label class="image-button" for="profile-image">Upload a profile image</label>
           <%= f.hidden_field :image, value: @profile.cached_image_data %>
           <span class="hidden"><%= f.file_field :image, id: "profile-image", class: "profile_image" %></span>
@@ -47,7 +48,7 @@
         </div>
       <% end %>
 
-      <div class="field padding-top">
+      <div class="field">
         <%= f.label :age %>
         <%= f.text_field :age, class: "text-field" %>
       </div>
